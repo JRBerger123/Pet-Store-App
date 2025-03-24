@@ -1,28 +1,28 @@
-
 package library.app;
-
-import library.inventory.Item;
-import library.inventory.Book;
-import library.inventory.Genre;
-import library.inventory.Periodical;
-import library.inventory.Category;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
-
 import java.util.ArrayList;
 import java.util.List;
+import library.inventory.Item;
+import library.inventory.Periodical;
+import library.inventory.Pet;
+import library.inventory.PetCategory;
+import library.inventory.PetType;
 
 /**
- *  @author PUT_YOUR_NAMES_HERE
- *  @since PUT_THE_CURRENT_DATE_HERE
- *  @version 1.0 beta
- *  @see <a href="{PUT_YOUR_URL_HERE}">GitHub Repository</a>
+ * ...
  *
+ * @author Brandon Berger, Ricardo Pretorius
+ * @version 0.1
+ * @since 2025.03.24
+ * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
+ * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ * 
  */
-public class LibraryApp {
+public class PetStoreApp {
 
     private static final String INVENTORY_FILE = "LibraryData.txt";
     
@@ -32,7 +32,7 @@ public class LibraryApp {
 
     private final List<Item> inventory;
 
-    public LibraryApp(){
+    public PetStoreApp(){
         this.inventory = new ArrayList<>();
     } // end of constructor
 
@@ -64,39 +64,39 @@ public class LibraryApp {
 
     } // end of deleteItem method
 
-    private Book addBook(String title, String dateReceived, String description) throws Exception {
+    private Pet addPet(String title, String dateReceived, String description) throws Exception {
 
-        Book book;
+        Pet book;
         int userInput;
         String author;
-        Genre genre = null;
+        PetType genre = null;
 
         author = Input.getString("Author: ");
 
         try {
             userInput = Input.getIntRange("Genre 1=Fiction, 2=Children, 3=Poetry: ", 1, 3);
-            genre = Genre.values()[userInput - 1];
+            genre = PetType.values()[userInput - 1];
         } catch (Exception e){
-            throw new Exception("Invalid data! Book Genre = " + genre);
+            throw new Exception("Invalid data! Pet Genre = " + genre);
         }
 
-        book = new Book(title, dateReceived, author, genre);
+        book = new Pet(title, dateReceived, author, genre);
         book.setDescription(description);
 
         return book;
-    } // end of addBook method
+    } // end of addPet method
 
     private Periodical addPeriodical(String title, String dateReceived, String description) throws Exception {
 
         Periodical periodical;
         String publisher;
-        Category category = null;
+        PetCategory category = null;
 
         publisher = Input.getString("Publisher: ");
 
         try {
             int userInput = Input.getIntRange("Category 1=Magazine, 2=Journal, 3=Newspaper: ", 1, 3);
-            category = Category.values()[userInput - 1];
+            category = PetCategory.values()[userInput - 1];
         } catch (Exception e){
             throw new Exception("Invalid data! Periodical Category = " + category);
         }
@@ -117,11 +117,11 @@ public class LibraryApp {
         String dateReceived = Input.getDate("Date Received (MM-DD-YYYY): ");
         String description = Input.getLine("Description or press enter to continue: ");
 
-        int inventoryType = Input.getIntRange("Type 1=Book, 2=Periodical: ", 1, 2);
+        int inventoryType = Input.getIntRange("Type 1=Pet, 2=Periodical: ", 1, 2);
 
         switch(inventoryType){
             case 1:
-                Book b = addBook(title, dateReceived, description);
+                Pet b = addPet(title, dateReceived, description);
                 inventory.add(b);
                 System.out.println("Successful Add: " + b);
                 Input.getLine("Press enter to continue...");
@@ -141,12 +141,12 @@ public class LibraryApp {
     } // end of addItem method
 
     private void displayInventory(){
-        System.out.println("Book Inventory");
+        System.out.println("Pet Inventory");
         System.out.println(SINGLE_DASH_LINE);
         System.out.println("ID  Title           Date Rec'd Author          Genre");
         System.out.println("--- --------------- ---------- --------------- ----------");
         for (Item item : inventory) {
-            if (item instanceof Book){
+            if (item instanceof Pet){
                 item.displayItem();
             }
         }
@@ -175,20 +175,20 @@ public class LibraryApp {
         Java will automatically close the file so there is no need to write a close statement
         NOTE: Java doesn't automatically close the file if the file is opened inside the block
         */
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(LibraryApp.INVENTORY_FILE))) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(PetStoreApp.INVENTORY_FILE))) {
 
             for(Item item : inventory){
 
                 // The file will be piped delimited so each field is separated by a |
-                if (item instanceof Book)
+                if (item instanceof Pet)
                     bw.write("BOOK|");
                 else if (item instanceof Periodical)
                     bw.write("PERIODICAL|");
 
                 bw.write(item.getId() + "|" + item.getTitle() + "|" + item.getDateReceived() + "|" + item.getDescription() + "|");
 
-                if (item instanceof Book)
-                    bw.write(((Book) item).getAuthor() + "|" + ((Book) item).getGenre() + "\n");
+                if (item instanceof Pet)
+                    bw.write(((Pet) item).getAuthor() + "|" + ((Pet) item).getGenre() + "\n");
                 else if (item instanceof Periodical)
                     bw.write(((Periodical) item).getPublisher() + "|" + ((Periodical) item).getCategory() + "\n");
             }
@@ -200,7 +200,7 @@ public class LibraryApp {
             System.out.println(e.getMessage());
         }
 
-        System.out.println(inventory.size() + " Inventory records successfully written to " + LibraryApp.INVENTORY_FILE);
+        System.out.println(inventory.size() + " Inventory records successfully written to " + PetStoreApp.INVENTORY_FILE);
         Input.getLine("Please any key to continue...");
 
     }
@@ -216,7 +216,7 @@ public class LibraryApp {
         Java will automatically close the file so there is no need to write a close statement
         NOTE: Java doesn't automatically close the file if the file is opened inside the block
         */
-        try (BufferedReader br = new BufferedReader(new FileReader(LibraryApp.INVENTORY_FILE))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(PetStoreApp.INVENTORY_FILE))) {
 
             String inLine;
 
@@ -227,12 +227,12 @@ public class LibraryApp {
                 //0=item 1=id, 2=title, 3=date, 4=description, 5=author/publisher, 6=genre/category
                 switch(data[0]){
                     case "BOOK":
-                        Book b = new Book(Integer.parseInt(data[1]), data[2], data[3], data[5], Genre.valueOf(data[6]));
+                        Pet b = new Pet(Integer.parseInt(data[1]), data[2], data[3], data[5], PetType.valueOf(data[6]));
                         b.setDescription(data[4]);
                         inventory.add(b);
                         break;
                     case "PERIODICAL":
-                        Periodical p = new Periodical(Integer.parseInt(data[1]), data[2], data[3], data[5], Category.valueOf(data[6]));
+                        Periodical p = new Periodical(Integer.parseInt(data[1]), data[2], data[3], data[5], PetCategory.valueOf(data[6]));
                         p.setDescription(data[4]);
                         inventory.add(p);
                         break;
@@ -250,7 +250,7 @@ public class LibraryApp {
             e.getMessage();
         } // end of try-catch
 
-        System.out.println(inventory.size() + " Inventory records successfully loaded from " + LibraryApp.INVENTORY_FILE);
+        System.out.println(inventory.size() + " Inventory records successfully loaded from " + PetStoreApp.INVENTORY_FILE);
         Input.getLine("Please any key to continue...");
     } // end of loadInventory method
 
@@ -313,7 +313,7 @@ public class LibraryApp {
 
     public static void main(String[] args) {
 
-        LibraryApp app = new LibraryApp();
+        PetStoreApp app = new PetStoreApp();
 
         app.displayAppHeading();
 
@@ -328,4 +328,4 @@ public class LibraryApp {
 
     } // end of main method
 
-} // end of LibraryApp class
+} // end of PetStoreApp class

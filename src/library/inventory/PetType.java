@@ -1,6 +1,6 @@
 package library.inventory;
 
-public enum Genre {
+public enum PetType {
     FICTION,
     CHILDREN,
     POETRY

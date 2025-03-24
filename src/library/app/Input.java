@@ -4,6 +4,16 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+
+/**
+ * ...
+ *
+ * @author Brandon Berger, Ricardo Pretorius
+ * @version 0.1
+ * @since 2025.03.24
+ * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
+ * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ */
 public class Input {
 	
     public static Scanner sc = new Scanner(System.in);

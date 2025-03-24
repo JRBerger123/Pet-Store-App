@@ -1,6 +1,6 @@
 package library.inventory;
 
-public enum Category {
+public enum PetCategory {
     MAGAZINE,
     JOURNAL,
     NEWSPAPER

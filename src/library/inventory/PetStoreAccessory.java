@@ -1,16 +1,26 @@
 package library.inventory;
 
-public class Periodical extends Item {
+/**
+ * ...
+ *
+ * @author Brandon Berger, Ricardo Pretorius
+ * @version 0.1
+ * @since 2025.03.24
+ * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
+ * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ * 
+ */
+public class PetStoreAccessory extends Item {
     private String publisher;
-    private Category category;
+    private PetCategory category;
 
-    public Periodical(String title, String dateReceived, String publisher, Category category) throws Exception {
+    public PetStoreAccessory(String title, String dateReceived, String publisher, PetCategory category) throws Exception {
         super(title, dateReceived);
         setPublisher(publisher);
         setCategory(category);
     }
 
-    public Periodical(int id, String title, String dateReceived, String publisher, Category category) throws Exception {
+    public PetStoreAccessory(int id, String title, String dateReceived, String publisher, PetCategory category) throws Exception {
         super(id, title, dateReceived);
         setPublisher(publisher);
         setCategory(category);
@@ -29,9 +39,9 @@ public class Periodical extends Item {
         this.publisher = publisher;
     }
 
-    public Category getCategory() { return category; }
+    public PetCategory getCategory() { return category; }
 
-    public void setCategory(Category category) {
+    public void setCategory(PetCategory category) {
         this.category = category;
     }
 
