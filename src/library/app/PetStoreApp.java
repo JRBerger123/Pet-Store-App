@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 import library.inventory.Item;
-import library.inventory.Periodical;
 import library.inventory.Pet;
 import library.inventory.PetCategory;
+import library.inventory.PetStoreAccessory;
 import library.inventory.PetType;
 
 /**
@@ -39,7 +39,7 @@ public class PetStoreApp {
     private void displayAppHeading() {
 
         System.out.println(DOUBLE_DASH_LINE);
-        System.out.println("Welcome to the Library App");
+        System.out.println("Welcome to the Pet Store App");
         System.out.println(DOUBLE_DASH_LINE);
 
     } // end of displayAppHeading method
@@ -86,9 +86,9 @@ public class PetStoreApp {
         return book;
     } // end of addPet method
 
-    private Periodical addPeriodical(String title, String dateReceived, String description) throws Exception {
+    private PetStoreAccessory addPeriodical(String title, String dateReceived, String description) throws Exception {
 
-        Periodical periodical;
+        PetStoreAccessory periodical;
         String publisher;
         PetCategory category = null;
 
@@ -101,7 +101,7 @@ public class PetStoreApp {
             throw new Exception("Invalid data! Periodical Category = " + category);
         }
 
-        periodical = new Periodical(title, dateReceived, publisher, category);
+        periodical = new PetStoreAccessory(title, dateReceived, publisher, category);
         periodical.setDescription(description);
 
         return periodical;
@@ -127,7 +127,7 @@ public class PetStoreApp {
                 Input.getLine("Press enter to continue...");
                 break;
             case 2:
-                Periodical p = addPeriodical(title, dateReceived, description);
+                PetStoreAccessory p = addPeriodical(title, dateReceived, description);
                 inventory.add(p);
                 System.out.println("Successful Add: " + p);
                 Input.getLine("Press enter to continue...");
@@ -157,7 +157,7 @@ public class PetStoreApp {
         System.out.println("ID  Title           Date Rec'd Publisher       Category");
         System.out.println("--- --------------- ---------- --------------- ----------");
         for (Item item : inventory) {
-            if (item instanceof Periodical){
+            if (item instanceof PetStoreAccessory){
                 item.displayItem();
             }
         }
@@ -182,15 +182,15 @@ public class PetStoreApp {
                 // The file will be piped delimited so each field is separated by a |
                 if (item instanceof Pet)
                     bw.write("BOOK|");
-                else if (item instanceof Periodical)
+                else if (item instanceof PetStoreAccessory)
                     bw.write("PERIODICAL|");
 
                 bw.write(item.getId() + "|" + item.getTitle() + "|" + item.getDateReceived() + "|" + item.getDescription() + "|");
 
                 if (item instanceof Pet)
                     bw.write(((Pet) item).getAuthor() + "|" + ((Pet) item).getGenre() + "\n");
-                else if (item instanceof Periodical)
-                    bw.write(((Periodical) item).getPublisher() + "|" + ((Periodical) item).getCategory() + "\n");
+                else if (item instanceof PetStoreAccessory)
+                    bw.write(((PetStoreAccessory) item).getPublisher() + "|" + ((PetStoreAccessory) item).getCategory() + "\n");
             }
 
             bw.flush();
@@ -232,7 +232,7 @@ public class PetStoreApp {
                         inventory.add(b);
                         break;
                     case "PERIODICAL":
-                        Periodical p = new Periodical(Integer.parseInt(data[1]), data[2], data[3], data[5], PetCategory.valueOf(data[6]));
+                        PetStoreAccessory p = new PetStoreAccessory(Integer.parseInt(data[1]), data[2], data[3], data[5], PetCategory.valueOf(data[6]));
                         p.setDescription(data[4]);
                         inventory.add(p);
                         break;
