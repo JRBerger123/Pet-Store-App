@@ -1,0 +1,192 @@
+"C:\Program Files\Amazon Corretto\jdk17.0.7_7\bin\java.exe" "-javaagent:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2024.2.4\lib\idea_rt.jar=64171:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2024.2.4\bin" -Dfile.encoding=UTF-8 -classpath "C:\Users\jososa02\OneDrive - Wayne State College\Java Projects\Attendence-App\out\production\Attendence-App" AttendanceApp
+==================================================
+Welcome to the Attendance App
+==================================================
+
+Enter the name of course 1: 9am
+
+Enter 9am student's name or 'q' to quit: Peter
+Enter Peter's seat number: 1
+
+Enter 9am student's name or 'q' to quit: Jack
+Enter Jack's seat number: 2
+
+Enter 9am student's name or 'q' to quit: q
+
+--------------------------------------------------
+
+Enter the name of course 2: 10am
+
+Enter 10am student's name or 'q' to quit: Jeff
+Enter Jeff's seat number: 1
+
+Enter 10am student's name or 'q' to quit: Nate
+Enter Nate's seat number: 2
+
+Enter 10am student's name or 'q' to quit: q
+
+==================================================
+Attendance Tracking Started!
+==================================================
+
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Attendance App
+1 = Take 9am Attendance
+2 = Take 10am Attendance
+3 = Display All Attendance Report
+--------------------------------------------------
+Menu Choice: 
+1
+--------------------------------------------------
+
+Processing attendance for 9am
+--------------------------------------------------
+
+Enter 9am's Student Seat # or 0 to quit: 1
+
+--------------------------------------------------
+Enter #1 Peter Attendance
+--------------------------------------------------
+0 = On Time
+1 = Late
+2 = Excused
+3 = Unexcused
+--------------------------------------------------
+Enter Status Type: 0
+--------------------------------------------------
+Seat # 1 Peter
+On Time: 1 Late: 0 Excused: 0 Unexcused: 0
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Attendance App
+1 = Take 9am Attendance
+2 = Take 10am Attendance
+3 = Display All Attendance Report
+--------------------------------------------------
+Menu Choice: 1
+--------------------------------------------------
+
+Processing attendance for 9am
+--------------------------------------------------
+
+Enter 9am's Student Seat # or 0 to quit: 2
+
+--------------------------------------------------
+Enter #2 Jack Attendance
+--------------------------------------------------
+0 = On Time
+1 = Late
+2 = Excused
+3 = Unexcused
+--------------------------------------------------
+Enter Status Type: 1
+--------------------------------------------------
+Seat # 2 Jack
+On Time: 0 Late: 1 Excused: 0 Unexcused: 0
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Attendance App
+1 = Take 9am Attendance
+2 = Take 10am Attendance
+3 = Display All Attendance Report
+--------------------------------------------------
+Menu Choice: 2
+--------------------------------------------------
+
+Processing attendance for 10am
+--------------------------------------------------
+
+Enter 10am's Student Seat # or 0 to quit: 1
+
+--------------------------------------------------
+Enter #1 Jeff Attendance
+--------------------------------------------------
+0 = On Time
+1 = Late
+2 = Excused
+3 = Unexcused
+--------------------------------------------------
+Enter Status Type: 2
+--------------------------------------------------
+Seat # 1 Jeff
+On Time: 0 Late: 0 Excused: 1 Unexcused: 0
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Attendance App
+1 = Take 9am Attendance
+2 = Take 10am Attendance
+3 = Display All Attendance Report
+--------------------------------------------------
+Menu Choice: 2
+--------------------------------------------------
+
+Processing attendance for 10am
+--------------------------------------------------
+
+Enter 10am's Student Seat # or 0 to quit: 2
+
+--------------------------------------------------
+Enter #2 Nate Attendance
+--------------------------------------------------
+0 = On Time
+1 = Late
+2 = Excused
+3 = Unexcused
+--------------------------------------------------
+Enter Status Type: 3
+--------------------------------------------------
+Seat # 2 Nate
+On Time: 0 Late: 0 Excused: 0 Unexcused: 1
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Attendance App
+1 = Take 9am Attendance
+2 = Take 10am Attendance
+3 = Display All Attendance Report
+--------------------------------------------------
+Menu Choice: 3
+--------------------------------------------------
+
+9am Attendance Summary:
+Total Students: 2
+On Time: 1
+Late: 1
+Excused Absences: 0
+Unexcused Absences: 0
+Seat   Name            OnTime Late Excused Unexcused
+====== =============== ====== ==== ======= =========
+     1 Peter                1    0       0         0
+     2 Jack                 0    1       0         0
+
+10am Attendance Summary:
+Total Students: 2
+On Time: 0
+Late: 0
+Excused Absences: 1
+Unexcused Absences: 1
+Seat   Name            OnTime Late Excused Unexcused
+====== =============== ====== ==== ======= =========
+     1 Jeff                 0    0       1         0
+     2 Nate                 0    0       0         1
+
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Attendance App
+1 = Take 9am Attendance
+2 = Take 10am Attendance
+3 = Display All Attendance Report
+--------------------------------------------------
+Menu Choice: 0
+--------------------------------------------------
+
+Attendance App terminated. Thank you for using the system.
+
+
+Process finished with exit code 0
