@@ -14,16 +14,14 @@ public class Bird extends Pet {
     private boolean canFly;
     private boolean isMigratory;
 
-    public Bird(String title, String dateReceived, String name, HabitatType habitat) throws Exception {
-        super(title, dateReceived);
+    public Bird(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
+        super(name, dateReceived, habitat, feedingSchedule);
         setName(name);
-        setHabitatType(habitat);
     }
 
-    public Bird(int id, String title, String dateReceived, String name, HabitatType habitat) throws Exception {
-        super(id, title, dateReceived);
+    public Bird(int id, String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
+        super(id, name, dateReceived, habitat, feedingSchedule);
         setName(name);
-        setHabitatType(habitat);
     }
 
     public String getName() { return name; }
@@ -36,10 +34,6 @@ public class Bird extends Pet {
 
         this.name = name;
     }
-
-    public HabitatType getHabitatType() { return habitat; }
-
-    public void setHabitatType(HabitatType habitat) { this.habitat = habitat; }
 
     @Override
     public void displayItem(){

@@ -25,21 +25,25 @@ public class Pet {
     protected HabitatType habitat;
     protected FeedingSchedule feedingSchedule;
 
-    public Pet(String name, String dateAdded) throws Exception {
+    public Pet(String name, String dateAdded, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
         this.id = ++Pet.lastId;
         setName(name);
         setDateAdded(dateAdded);
     }
 
-    public Pet(int id, String name, String dateAdded) throws Exception {
+    public Pet(int id, String name, String dateAdded, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
         this.id = id;
         setName(name);
         setDateAdded(dateAdded);
     }
 
-    public static void setLastId(int lastId){ Pet.lastId = lastId;  }
+    public static void setLastId(int lastId){
+        Pet.lastId = lastId;
+    }
 
-    public int getId() { return id; }
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -71,6 +75,22 @@ public class Pet {
 
     public void setDescription(String description) {
         this.description = description.trim();
+    }
+
+    public FeedingSchedule getFeedingSchedule() { 
+        return feedingSchedule; 
+    }
+
+    public void setFeedingSchedule(FeedingSchedule schedule) {
+        this.feedingSchedule = schedule;
+    }
+
+    public HabitatType getHabitatType() { 
+        return habitat;
+    }
+
+    public void setHabitatType(HabitatType habitat) {
+         this.habitat = habitat;
     }
 
     public void displayItem(){

@@ -12,38 +12,28 @@ package library.inventory;
  * 
  */
 public class Fish extends Pet {
-    private String type;
+    private boolean isTropical;
     private boolean usesFreshwater;
 
-    public Fish(String title, String dateReceived, String type, FeedingSchedule schedule) throws Exception {
-        super(title, dateReceived);
-        setType(type);
-        setFeedingSchedule(schedule);
+    public Fish(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
+        super(name, dateReceived, habitat, feedingSchedule);
+        setName(name);
     }
 
-    public Fish(int id, String title, String dateReceived, String type, FeedingSchedule schedule) throws Exception {
-        super(id, title, dateReceived);
-        setType(type);
-        setFeedingSchedule(schedule);
+    public Fish(int id, String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
+        super(id, name, dateReceived, habitat, feedingSchedule);
+        setName(name);
     }
 
-    public String getType() {
-        return type;
-    }
+    public String getName() { return name; }
 
-    public void setType(String type) throws Exception {
-        type = type.trim();
+    public void setName(String name) throws Exception {
+        name = name.trim();
 
-        if (type.isBlank())
-            throw new Exception("Invalid data! Fish type cannot be empty.");
+        if (name.isBlank())
+            throw new Exception("Invalid data! Name can not be empty.");
 
-        this.type = type;
-    }
-
-    public FeedingSchedule getFeedingSchedule() { return schedule; }
-
-    public void setFeedingSchedule(FeedingSchedule category) {
-        this.schedule = schedule;
+        this.name = name;
     }
 
     @Override
