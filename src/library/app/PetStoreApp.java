@@ -188,9 +188,9 @@ public class PetStoreApp {
                 bw.write(item.getId() + "|" + item.getTitle() + "|" + item.getDateReceived() + "|" + item.getDescription() + "|");
 
                 if (item instanceof Bird)
-                    bw.write(((Bird) item).getAuthor() + "|" + ((Bird) item).getGenre() + "\n");
+                    bw.write(((Bird) item).getName() + "|" + ((Bird) item).getHabitatType() + "\n");
                 else if (item instanceof Fish)
-                    bw.write(((Fish) item).getPublisher() + "|" + ((Fish) item).getCategory() + "\n");
+                    bw.write(((Fish) item).getType() + "|" + ((Fish) item).getFeedingSchedule() + "\n");
             }
 
             bw.flush();

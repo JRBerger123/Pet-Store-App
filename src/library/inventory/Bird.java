@@ -11,39 +11,39 @@ package library.inventory;
  * 
  */
 public class Bird extends Pet {
-    private String author;
-    private HabitatType genre;
+    private String name;
+    private HabitatType habitat;
 
-    public Bird(String title, String dateReceived, String author, HabitatType genre) throws Exception {
+    public Bird(String title, String dateReceived, String name, HabitatType habitat) throws Exception {
         super(title, dateReceived);
-        setAuthor(author);
-        setGenre(genre);
+        setName(name);
+        setHabitatType(habitat);
     }
 
-    public Bird(int id, String title, String dateReceived, String author, HabitatType genre) throws Exception {
+    public Bird(int id, String title, String dateReceived, String name, HabitatType habitat) throws Exception {
         super(id, title, dateReceived);
-        setAuthor(author);
-        setGenre(genre);
+        setName(name);
+        setHabitatType(habitat);
     }
 
-    public String getAuthor() { return author; }
+    public String getName() { return name; }
 
-    public void setAuthor(String author) throws Exception {
-        author = author.trim();
+    public void setName(String name) throws Exception {
+        name = name.trim();
 
-        if (author.isBlank())
-            throw new Exception("Invalid data! Author can not be empty.");
+        if (name.isBlank())
+            throw new Exception("Invalid data! Name can not be empty.");
 
-        this.author = author;
+        this.name = name;
     }
 
-    public HabitatType getGenre() { return genre; }
+    public HabitatType getHabitatType() { return habitat; }
 
-    public void setGenre(HabitatType genre) { this.genre = genre; }
+    public void setHabitatType(HabitatType habitat) { this.habitat = habitat; }
 
     @Override
     public void displayItem(){
         super.displayItem();
-        System.out.printf(" %-15s %-10s\n", author, genre);
+        System.out.printf(" %-15s %-10s\n", name, habitat);
     }
 }

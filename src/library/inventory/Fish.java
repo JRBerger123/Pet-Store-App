@@ -11,43 +11,43 @@ package library.inventory;
  * 
  */
 public class Fish extends Pet {
-    private String publisher;
-    private FeedingSchedule category;
+    private String type;
+    private FeedingSchedule schedule;
 
-    public Fish(String title, String dateReceived, String publisher, FeedingSchedule category) throws Exception {
+    public Fish(String title, String dateReceived, String type, FeedingSchedule schedule) throws Exception {
         super(title, dateReceived);
-        setPublisher(publisher);
-        setCategory(category);
+        setType(type);
+        setFeedingSchedule(schedule);
     }
 
-    public Fish(int id, String title, String dateReceived, String publisher, FeedingSchedule category) throws Exception {
+    public Fish(int id, String title, String dateReceived, String type, FeedingSchedule schedule) throws Exception {
         super(id, title, dateReceived);
-        setPublisher(publisher);
-        setCategory(category);
+        setType(type);
+        setFeedingSchedule(schedule);
     }
 
-    public String getPublisher() {
-        return publisher;
+    public String getType() {
+        return type;
     }
 
-    public void setPublisher(String publisher) throws Exception {
-        publisher = publisher.trim();
+    public void setType(String type) throws Exception {
+        type = type.trim();
 
-        if (publisher.isBlank())
-            throw new Exception("Invalid data! Author can not be empty.");
+        if (type.isBlank())
+            throw new Exception("Invalid data! Fish type cannot be empty.");
 
-        this.publisher = publisher;
+        this.type = type;
     }
 
-    public FeedingSchedule getCategory() { return category; }
+    public FeedingSchedule getFeedingSchedule() { return schedule; }
 
-    public void setCategory(FeedingSchedule category) {
-        this.category = category;
+    public void setFeedingSchedule(FeedingSchedule category) {
+        this.schedule = schedule;
     }
 
     @Override
     public void displayItem(){
         super.displayItem();
-        System.out.printf(" %-15s %-10s\n", publisher, category);
+        System.out.printf(" %-15s %-10s\n", type, schedule);
     }
 }
