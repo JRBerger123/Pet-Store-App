@@ -14,70 +14,66 @@ import java.time.format.DateTimeFormatter;
  * 
  */
 public class Pet {
-
     private static int lastId = 0;
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
 
     protected final int id;
-    protected String title;
-    protected LocalDate dateReceived;
-    protected String description;
+    protected String name;
+    protected double price;
+    protected int quantity;
+    protected LocalDate dateAdded;
+    protected HabitatType habitat;
+    protected FeedingSchedule feedingSchedule;
 
-    public Pet(String title, String dateReceived) throws Exception {
+    public Pet(String name, String dateAdded) throws Exception {
         this.id = ++Pet.lastId;
-        setTitle(title);
-        setDateReceived(dateReceived);
+        setName(name);
+        setDateAdded(dateAdded);
     }
 
-    public Pet(int id, String title, String dateReceived) throws Exception {
+    public Pet(int id, String name, String dateAdded) throws Exception {
         this.id = id;
-        setTitle(title);
-        setDateReceived(dateReceived);
+        setName(name);
+        setDateAdded(dateAdded);
     }
 
     public static void setLastId(int lastId){ Pet.lastId = lastId;  }
 
     public int getId() { return id; }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) throws Exception {
-        title = title.trim();
+    public void setName(String name) throws Exception {
+        name = name.trim();
 
-        if (title.isBlank()){
-            throw new Exception("Invalid! Title can not be empty.");
+        if (name.isBlank()){
+            throw new Exception("Invalid! Name cannot be empty.");
         }
 
-        this.title = title;
+        this.name = name;
     }
 
-    public String getDateReceived() {
-        return dateReceived.format(Pet.formatter);
+    public String getDateAdded() {
+        return dateAdded.format(Pet.formatter);
     }
 
-    public void setDateReceived(String dateReceived) throws Exception {
+    public void setDateAdded(String dateAdded) throws Exception {
         try {
-            this.dateReceived = LocalDate.parse(dateReceived, Pet.formatter);
+            this.dateAdded = LocalDate.parse(dateAdded, Pet.formatter);
         } catch (Exception e){
             throw new Exception("Invalid date! Must be MM-DD-YYYY");
         }
     }
 
-    public String getDescription() { return description; }
-
-    public void setDescription(String description) {
-        this.description = description.trim();
-    }
-
     public void displayItem(){
-        System.out.printf("%3d %-15s %10s", id, title, getDateReceived());
+        System.out.printf("%3d %-15s %10s", id, name, getDateAdded());
     }
 
     @Override
     public String toString(){
-        return id + " " + title + " " + getDateReceived();
+        return id + " | " + name + " | " + getDateAdded();
     }
 
 }
