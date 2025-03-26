@@ -65,17 +65,17 @@ public class PetStoreApp {
 
     } // end of deleteItem method
 
-    private Bird addPet(String title, String dateReceived, String description) throws Exception {
+    private Bird addBird(String title, String dateReceived, String description) throws Exception {
 
         Bird book;
         int userInput;
         String name;
         HabitatType habitat = null;
 
-        name = Input.getString("Name of fish:  ");
+        name = Input.getString("Name of bird:  ");
 
         try {
-            userInput = Input.getIntRange("Genre 1=Fiction, 2=Children, 3=Poetry: ", 1, 3);
+            userInput = Input.getIntRange("HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace  ", 1, 4);
             habitat = HabitatType.values()[userInput - 1];
         } catch (Exception e){
             throw new Exception("Invalid data! Pet habitat type = " + habitat);
@@ -87,7 +87,7 @@ public class PetStoreApp {
         return book;
     } // end of addPet method
 
-    private Fish addPeriodical(String title, String dateReceived, String description) throws Exception {
+    private Fish addFish(String title, String dateReceived, String description) throws Exception {
 
         Fish periodical;
         String type;
@@ -108,7 +108,7 @@ public class PetStoreApp {
         return periodical;
     } // end of addPeriodical method
 
-    private void addItem() throws Exception {
+    private void addPet() throws Exception {
 
         System.out.println("Add Inventory");
         System.out.println(SINGLE_DASH_LINE);
