@@ -69,19 +69,19 @@ public class PetStoreApp {
 
         Bird book;
         int userInput;
-        String author;
-        HabitatType genre = null;
+        String name;
+        HabitatType habitat = null;
 
-        author = Input.getString("Author: ");
+        name = Input.getString("Name of fish:  ");
 
         try {
             userInput = Input.getIntRange("Genre 1=Fiction, 2=Children, 3=Poetry: ", 1, 3);
-            genre = HabitatType.values()[userInput - 1];
+            habitat = HabitatType.values()[userInput - 1];
         } catch (Exception e){
-            throw new Exception("Invalid data! Pet Genre = " + genre);
+            throw new Exception("Invalid data! Pet habitat type = " + habitat);
         }
 
-        book = new Bird(title, dateReceived, author, genre);
+        book = new Bird(title, dateReceived, name, habitat);
         book.setDescription(description);
 
         return book;
@@ -90,19 +90,19 @@ public class PetStoreApp {
     private Fish addPeriodical(String title, String dateReceived, String description) throws Exception {
 
         Fish periodical;
-        String publisher;
-        FeedingSchedule category = null;
+        String type;
+        FeedingSchedule schedule = null;
 
-        publisher = Input.getString("Publisher: ");
+        type = Input.getString("Fish type: ");
 
         try {
             int userInput = Input.getIntRange("Category 1=Magazine, 2=Journal, 3=Newspaper: ", 1, 3);
-            category = FeedingSchedule.values()[userInput - 1];
+            schedule = FeedingSchedule.values()[userInput - 1];
         } catch (Exception e){
-            throw new Exception("Invalid data! Periodical Category = " + category);
+            throw new Exception("Invalid data! Periodical Category = " + schedule);
         }
 
-        periodical = new Fish(title, dateReceived, publisher, category);
+        periodical = new Fish(title, dateReceived, type, schedule);
         periodical.setDescription(description);
 
         return periodical;
@@ -118,7 +118,7 @@ public class PetStoreApp {
         String dateReceived = Input.getDate("Date Received (MM-DD-YYYY): ");
         String description = Input.getLine("Description or press enter to continue: ");
 
-        int inventoryType = Input.getIntRange("Type 1=Pet, 2=Periodical: ", 1, 2);
+        int inventoryType = Input.getIntRange("Type 1=Bird, 2=Fish: ", 1, 2);
 
         switch(inventoryType){
             case 1:
@@ -186,7 +186,7 @@ public class PetStoreApp {
                 else if (item instanceof Fish)
                     bw.write("PERIODICAL|");
 
-                bw.write(item.getId() + "|" + item.getTitle() + "|" + item.getDateReceived() + "|" + item.getDescription() + "|");
+                bw.write(item.getId() + "|" + item.getName() + "|" + item.getDateAdded() + "|" + item.getDescription() + "|");
 
                 if (item instanceof Bird)
                     bw.write(((Bird) item).getName() + "|" + ((Bird) item).getHabitatType() + "\n");

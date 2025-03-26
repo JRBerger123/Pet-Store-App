@@ -25,6 +25,7 @@ public class Pet {
     protected LocalDate dateAdded;
     protected HabitatType habitat;
     protected FeedingSchedule feedingSchedule;
+    protected String description;
 
     public Pet(String name, String dateAdded) throws Exception {
         this.id = ++Pet.lastId;
@@ -66,6 +67,12 @@ public class Pet {
         } catch (Exception e){
             throw new Exception("Invalid date! Must be MM-DD-YYYY");
         }
+    }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) {
+        this.description = description.trim();
     }
 
     public void displayItem(){
