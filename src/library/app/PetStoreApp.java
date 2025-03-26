@@ -20,6 +20,7 @@ import library.inventory.HabitatType;
  * @since 2025.03.24
  * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
+ * @see <a href="https://github.com/RicardoPret">Ricardo Pretorius GitHub</a>
  * 
  */
 public class PetStoreApp {
