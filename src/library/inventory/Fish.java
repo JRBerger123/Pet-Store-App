@@ -13,7 +13,7 @@ package library.inventory;
  */
 public class Fish extends Pet {
     private String type;
-    private FeedingSchedule schedule;
+    private boolean usesFreshwater;
 
     public Fish(String title, String dateReceived, String type, FeedingSchedule schedule) throws Exception {
         super(title, dateReceived);

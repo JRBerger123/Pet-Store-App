@@ -114,23 +114,23 @@ public class PetStoreApp {
         System.out.println(SINGLE_DASH_LINE);
 
         System.out.println("Please enter the following inventory information:");
-        String title = Input.getString("Title: ");
+        String name = Input.getString("Name: ");
         String dateReceived = Input.getDate("Date Received (MM-DD-YYYY): ");
         String description = Input.getLine("Description or press enter to continue: ");
 
-        int inventoryType = Input.getIntRange("Type 1=Bird, 2=Fish: ", 1, 2);
+        int inventoryType = Input.getIntRange("Type: 1=Bird, 2=Fish: ", 1, 2);
 
         switch(inventoryType){
             case 1:
-                Bird b = addPet(title, dateReceived, description);
+                Bird b = addBird(name, dateReceived, description);
                 inventory.add(b);
-                System.out.println("Successful Add: " + b);
+                System.out.println("Successfully Added: " + b);
                 Input.getLine("Press enter to continue...");
                 break;
             case 2:
-                Fish p = addPeriodical(title, dateReceived, description);
+                Fish p = addFish(name, dateReceived, description);
                 inventory.add(p);
-                System.out.println("Successful Add: " + p);
+                System.out.println("Successfully Added: " + p);
                 Input.getLine("Press enter to continue...");
                 break;
             case 3:

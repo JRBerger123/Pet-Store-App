@@ -11,8 +11,8 @@ package library.inventory;
  * @see <a href="https://github.com/RicardoPret">Ricardo Pretorius GitHub</a>
  */
 public class Bird extends Pet {
-    private String name;
-    private HabitatType habitat;
+    private boolean canFly;
+    private boolean isMigratory;
 
     public Bird(String title, String dateReceived, String name, HabitatType habitat) throws Exception {
         super(title, dateReceived);

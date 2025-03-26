@@ -20,12 +20,10 @@ public class Pet {
 
     protected final int id;
     protected String name;
-    protected double price;
-    protected int quantity;
     protected LocalDate dateAdded;
+    protected String description;
     protected HabitatType habitat;
     protected FeedingSchedule feedingSchedule;
-    protected String description;
 
     public Pet(String name, String dateAdded) throws Exception {
         this.id = ++Pet.lastId;
