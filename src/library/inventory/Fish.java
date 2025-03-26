@@ -10,17 +10,17 @@ package library.inventory;
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  * 
  */
-public class PetStoreAccessory extends Item {
+public class Fish extends Pet {
     private String publisher;
-    private PetCategory category;
+    private FeedingSchedule category;
 
-    public PetStoreAccessory(String title, String dateReceived, String publisher, PetCategory category) throws Exception {
+    public Fish(String title, String dateReceived, String publisher, FeedingSchedule category) throws Exception {
         super(title, dateReceived);
         setPublisher(publisher);
         setCategory(category);
     }
 
-    public PetStoreAccessory(int id, String title, String dateReceived, String publisher, PetCategory category) throws Exception {
+    public Fish(int id, String title, String dateReceived, String publisher, FeedingSchedule category) throws Exception {
         super(id, title, dateReceived);
         setPublisher(publisher);
         setCategory(category);
@@ -39,9 +39,9 @@ public class PetStoreAccessory extends Item {
         this.publisher = publisher;
     }
 
-    public PetCategory getCategory() { return category; }
+    public FeedingSchedule getCategory() { return category; }
 
-    public void setCategory(PetCategory category) {
+    public void setCategory(FeedingSchedule category) {
         this.category = category;
     }
 

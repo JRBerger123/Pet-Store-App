@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
-import library.inventory.Item;
 import library.inventory.Pet;
-import library.inventory.PetCategory;
-import library.inventory.PetStoreAccessory;
-import library.inventory.PetType;
+import library.inventory.Bird;
+import library.inventory.FeedingSchedule;
+import library.inventory.Fish;
+import library.inventory.HabitatType;
 
 /**
  * ...
@@ -30,7 +30,7 @@ public class PetStoreApp {
 
     private static final String SINGLE_DASH_LINE = DOUBLE_DASH_LINE.replace('=', '-');
 
-    private final List<Item> inventory;
+    private final List<Pet> inventory;
 
     public PetStoreApp(){
         this.inventory = new ArrayList<>();
@@ -50,7 +50,7 @@ public class PetStoreApp {
 
         int id = Input.getInt("Please enter the inventory id: ");
 
-        for (Item item : inventory){
+        for (Pet item : inventory){
             System.out.println(id);
             if (item.getId() == id){
                 inventory.remove(item);
@@ -64,44 +64,44 @@ public class PetStoreApp {
 
     } // end of deleteItem method
 
-    private Pet addPet(String title, String dateReceived, String description) throws Exception {
+    private Bird addPet(String title, String dateReceived, String description) throws Exception {
 
-        Pet book;
+        Bird book;
         int userInput;
         String author;
-        PetType genre = null;
+        HabitatType genre = null;
 
         author = Input.getString("Author: ");
 
         try {
             userInput = Input.getIntRange("Genre 1=Fiction, 2=Children, 3=Poetry: ", 1, 3);
-            genre = PetType.values()[userInput - 1];
+            genre = HabitatType.values()[userInput - 1];
         } catch (Exception e){
             throw new Exception("Invalid data! Pet Genre = " + genre);
         }
 
-        book = new Pet(title, dateReceived, author, genre);
+        book = new Bird(title, dateReceived, author, genre);
         book.setDescription(description);
 
         return book;
     } // end of addPet method
 
-    private PetStoreAccessory addPeriodical(String title, String dateReceived, String description) throws Exception {
+    private Fish addPeriodical(String title, String dateReceived, String description) throws Exception {
 
-        PetStoreAccessory periodical;
+        Fish periodical;
         String publisher;
-        PetCategory category = null;
+        FeedingSchedule category = null;
 
         publisher = Input.getString("Publisher: ");
 
         try {
             int userInput = Input.getIntRange("Category 1=Magazine, 2=Journal, 3=Newspaper: ", 1, 3);
-            category = PetCategory.values()[userInput - 1];
+            category = FeedingSchedule.values()[userInput - 1];
         } catch (Exception e){
             throw new Exception("Invalid data! Periodical Category = " + category);
         }
 
-        periodical = new PetStoreAccessory(title, dateReceived, publisher, category);
+        periodical = new Fish(title, dateReceived, publisher, category);
         periodical.setDescription(description);
 
         return periodical;
@@ -121,13 +121,13 @@ public class PetStoreApp {
 
         switch(inventoryType){
             case 1:
-                Pet b = addPet(title, dateReceived, description);
+                Bird b = addPet(title, dateReceived, description);
                 inventory.add(b);
                 System.out.println("Successful Add: " + b);
                 Input.getLine("Press enter to continue...");
                 break;
             case 2:
-                PetStoreAccessory p = addPeriodical(title, dateReceived, description);
+                Fish p = addPeriodical(title, dateReceived, description);
                 inventory.add(p);
                 System.out.println("Successful Add: " + p);
                 Input.getLine("Press enter to continue...");
@@ -145,8 +145,8 @@ public class PetStoreApp {
         System.out.println(SINGLE_DASH_LINE);
         System.out.println("ID  Title           Date Rec'd Author          Genre");
         System.out.println("--- --------------- ---------- --------------- ----------");
-        for (Item item : inventory) {
-            if (item instanceof Pet){
+        for (Pet item : inventory) {
+            if (item instanceof Bird){
                 item.displayItem();
             }
         }
@@ -156,8 +156,8 @@ public class PetStoreApp {
         System.out.println(SINGLE_DASH_LINE);
         System.out.println("ID  Title           Date Rec'd Publisher       Category");
         System.out.println("--- --------------- ---------- --------------- ----------");
-        for (Item item : inventory) {
-            if (item instanceof PetStoreAccessory){
+        for (Pet item : inventory) {
+            if (item instanceof Fish){
                 item.displayItem();
             }
         }
@@ -177,20 +177,20 @@ public class PetStoreApp {
         */
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PetStoreApp.INVENTORY_FILE))) {
 
-            for(Item item : inventory){
+            for(Pet item : inventory){
 
                 // The file will be piped delimited so each field is separated by a |
-                if (item instanceof Pet)
+                if (item instanceof Bird)
                     bw.write("BOOK|");
-                else if (item instanceof PetStoreAccessory)
+                else if (item instanceof Fish)
                     bw.write("PERIODICAL|");
 
                 bw.write(item.getId() + "|" + item.getTitle() + "|" + item.getDateReceived() + "|" + item.getDescription() + "|");
 
-                if (item instanceof Pet)
-                    bw.write(((Pet) item).getAuthor() + "|" + ((Pet) item).getGenre() + "\n");
-                else if (item instanceof PetStoreAccessory)
-                    bw.write(((PetStoreAccessory) item).getPublisher() + "|" + ((PetStoreAccessory) item).getCategory() + "\n");
+                if (item instanceof Bird)
+                    bw.write(((Bird) item).getAuthor() + "|" + ((Bird) item).getGenre() + "\n");
+                else if (item instanceof Fish)
+                    bw.write(((Fish) item).getPublisher() + "|" + ((Fish) item).getCategory() + "\n");
             }
 
             bw.flush();
@@ -227,12 +227,12 @@ public class PetStoreApp {
                 //0=item 1=id, 2=title, 3=date, 4=description, 5=author/publisher, 6=genre/category
                 switch(data[0]){
                     case "BOOK":
-                        Pet b = new Pet(Integer.parseInt(data[1]), data[2], data[3], data[5], PetType.valueOf(data[6]));
+                        Bird b = new Bird(Integer.parseInt(data[1]), data[2], data[3], data[5], HabitatType.valueOf(data[6]));
                         b.setDescription(data[4]);
                         inventory.add(b);
                         break;
                     case "PERIODICAL":
-                        PetStoreAccessory p = new PetStoreAccessory(Integer.parseInt(data[1]), data[2], data[3], data[5], PetCategory.valueOf(data[6]));
+                        Fish p = new Fish(Integer.parseInt(data[1]), data[2], data[3], data[5], FeedingSchedule.valueOf(data[6]));
                         p.setDescription(data[4]);
                         inventory.add(p);
                         break;
@@ -244,7 +244,7 @@ public class PetStoreApp {
 
             // No explicit close needed - automatically handled when using Try-With-Resources
 
-            Item.setLastId(inventory.get(inventory.size() - 1).getId());
+            Pet.setLastId(inventory.get(inventory.size() - 1).getId());
 
         } catch (Exception e) {
             e.getMessage();

@@ -1,5 +1,8 @@
 package library.inventory;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * ...
  *
@@ -10,40 +13,71 @@ package library.inventory;
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
  * 
  */
-public class Pet extends Item {
-    private String author;
-    private PetType genre;
+public class Pet {
 
-    public Pet(String title, String dateReceived, String author, PetType genre) throws Exception {
-        super(title, dateReceived);
-        setAuthor(author);
-        setGenre(genre);
+    private static int lastId = 0;
+    private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+
+    protected final int id;
+    protected String title;
+    protected LocalDate dateReceived;
+    protected String description;
+
+    public Pet(String title, String dateReceived) throws Exception {
+        this.id = ++Pet.lastId;
+        setTitle(title);
+        setDateReceived(dateReceived);
     }
 
-    public Pet(int id, String title, String dateReceived, String author, PetType genre) throws Exception {
-        super(id, title, dateReceived);
-        setAuthor(author);
-        setGenre(genre);
+    public Pet(int id, String title, String dateReceived) throws Exception {
+        this.id = id;
+        setTitle(title);
+        setDateReceived(dateReceived);
     }
 
-    public String getAuthor() { return author; }
+    public static void setLastId(int lastId){ Pet.lastId = lastId;  }
 
-    public void setAuthor(String author) throws Exception {
-        author = author.trim();
+    public int getId() { return id; }
 
-        if (author.isBlank())
-            throw new Exception("Invalid data! Author can not be empty.");
-
-        this.author = author;
+    public String getTitle() {
+        return title;
     }
 
-    public PetType getGenre() { return genre; }
+    public void setTitle(String title) throws Exception {
+        title = title.trim();
 
-    public void setGenre(PetType genre) { this.genre = genre; }
+        if (title.isBlank()){
+            throw new Exception("Invalid! Title can not be empty.");
+        }
+
+        this.title = title;
+    }
+
+    public String getDateReceived() {
+        return dateReceived.format(Pet.formatter);
+    }
+
+    public void setDateReceived(String dateReceived) throws Exception {
+        try {
+            this.dateReceived = LocalDate.parse(dateReceived, Pet.formatter);
+        } catch (Exception e){
+            throw new Exception("Invalid date! Must be MM-DD-YYYY");
+        }
+    }
+
+    public String getDescription() { return description; }
+
+    public void setDescription(String description) {
+        this.description = description.trim();
+    }
+
+    public void displayItem(){
+        System.out.printf("%3d %-15s %10s", id, title, getDateReceived());
+    }
 
     @Override
-    public void displayItem(){
-        super.displayItem();
-        System.out.printf(" %-15s %-10s\n", author, genre);
+    public String toString(){
+        return id + " " + title + " " + getDateReceived();
     }
+
 }
