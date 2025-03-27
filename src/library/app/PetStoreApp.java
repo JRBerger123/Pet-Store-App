@@ -67,10 +67,12 @@ public class PetStoreApp {
 
     private Bird addBird(String title, String dateReceived, String description) throws Exception {
 
-        Bird book;
+        Bird bird;
         int userInput;
         String name;
         HabitatType habitat = null;
+        String canFly= "Unknown";
+        String isMigratory= "Unknown";
 
         name = Input.getString("Name of bird:  ");
 
@@ -81,10 +83,32 @@ public class PetStoreApp {
             throw new Exception("Invalid data! Pet habitat type = " + habitat);
         }
 
-        book = new Bird(title, dateReceived, name, habitat);
-        book.setDescription(description);
 
-        return book;
+        try {
+            canFly = Input.getString("Can this bird fly? yes, no or unknown? ");
+            if (!canFly.equals("yes") && !canFly.equals("no") && !canFly.equals("unknown")) {
+                throw new IllegalArgumentException("Invalid data! Can this bird fly? yes, no or unknown? ");
+            }
+        }
+        catch (Exception e){
+            throw new Exception("Invalid data! Can this bird fly? yes, no or unknown? ");
+            }
+
+        try {
+            isMigratory = Input.getString("Is migratory? yes, no or unknown? ");
+            if (!isMigratory.equals("yes") && !isMigratory.equals("no") && !isMigratory.equals("unknown")) {
+                throw new IllegalArgumentException("Invalid data! Can this bird migrate? yes, no or unknown? ");
+            }
+        }
+        catch (Exception e){
+            throw new Exception("Invalid data! Can this bird migrate? yes, no or unknown? ");
+        }
+
+
+        bird = new Bird(title, dateReceived, name, habitat, canFly, isMigratory);
+        bird.setDescription(description);
+
+        return bird;
     } // end of addPet method
 
     private Fish addFish(String title, String dateReceived, String description) throws Exception {
