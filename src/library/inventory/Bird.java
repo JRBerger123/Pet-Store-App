@@ -11,26 +11,26 @@ package library.inventory;
  * @see <a href="https://github.com/RicardoPret">Ricardo Pretorius GitHub</a>
  */
 public class Bird extends Pet {
-    private String canFly;
-    private String isMigratory;
+    private boolean canFly;
+    private boolean isMigratory;
 
-    public String getCanFly() {
+    public boolean isCanFly() {
         return canFly;
     }
 
-    public void setCanFly(String canFly) {
+    public void setCanFly(boolean canFly) {
         this.canFly = canFly;
     }
 
-    public String getIsMigratory() {
+    public boolean isMigratory() {
         return isMigratory;
     }
 
-    public void setIsMigratory(String isMigratory) {
+    public void setMigratory(boolean isMigratory) {
         this.isMigratory = isMigratory;
     }
 
-    public Bird(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule, String canFly, String isMigratory) throws Exception {
+    public Bird(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule, boolean canFly, boolean isMigratory) throws Exception {
         super(name, dateReceived, habitat, feedingSchedule);
         this.canFly = canFly;
         this.isMigratory = isMigratory;
@@ -40,8 +40,8 @@ public class Bird extends Pet {
     public Bird(int id, String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
         super(id, name, dateReceived, habitat, feedingSchedule);
         setName(name);
-        this.canFly = "Unknown";
-        this.isMigratory = "Unknown";
+        this.canFly = false;
+        this.isMigratory = false;
     }
 
     public String getName() { return name; }

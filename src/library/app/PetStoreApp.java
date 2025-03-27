@@ -71,8 +71,7 @@ public class PetStoreApp {
         int userInput;
         String name;
         HabitatType habitat = null;
-        String canFly= "Unknown";
-        String isMigratory= "Unknown";
+
 
         name = Input.getString("Name of bird:  ");
 
@@ -83,29 +82,13 @@ public class PetStoreApp {
             throw new Exception("Invalid data! Pet habitat type = " + habitat);
         }
 
+    int canFlyInput = Input.getIntRange("Can this bird fly? 1=Yes, 0=No: ", 0, 1);
+    boolean canFly = (canFlyInput == 1);
 
-        try {
-            canFly = Input.getString("Can this bird fly? yes, no or unknown? ");
-            if (!canFly.equals("yes") && !canFly.equals("no") && !canFly.equals("unknown")) {
-                throw new IllegalArgumentException("Invalid data! Can this bird fly? yes, no or unknown? ");
-            }
-        }
-        catch (Exception e){
-            throw new Exception("Invalid data! Can this bird fly? yes, no or unknown? ");
-            }
+    int isMigratory = Input.getIntRange("Is this bird migratory? 1=Yes, 0=No: ", 0, 1);
+    boolean migratory = (isMigratory == 1);
 
-        try {
-            isMigratory = Input.getString("Is migratory? yes, no or unknown? ");
-            if (!isMigratory.equals("yes") && !isMigratory.equals("no") && !isMigratory.equals("unknown")) {
-                throw new IllegalArgumentException("Invalid data! Can this bird migrate? yes, no or unknown? ");
-            }
-        }
-        catch (Exception e){
-            throw new Exception("Invalid data! Can this bird migrate? yes, no or unknown? ");
-        }
-
-
-        bird = new Bird(title, dateReceived, name, habitat, canFly, isMigratory);
+        bird = new Bird(title, dateReceived, name, habitat, canFly, migratory);
         bird.setDescription(description);
 
         return bird;
@@ -113,7 +96,7 @@ public class PetStoreApp {
 
     private Fish addFish(String title, String dateReceived, String description) throws Exception {
 
-        Fish periodical;
+        Fish fish;
         String type;
         FeedingSchedule schedule = null;
 
@@ -126,11 +109,17 @@ public class PetStoreApp {
             throw new Exception("Invalid data! Periodical Category = " + schedule);
         }
 
-        periodical = new Fish(title, dateReceived, type, schedule);
-        periodical.setDescription(description);
+        int isTropicalInput = Input.getIntRange("Is this fish tropical? 1=Yes, 0=No:  ", 0, 1);
+        boolean isTropical = (isTropicalInput == 1);
 
-        return periodical;
-    } // end of addPeriodical method
+        int usesFreshwaterInput = Input.getIntRange("Does this fish use fresh water? 1=Yes, 0=No: ", 0, 1);
+        boolean usesFreshwater = (usesFreshwaterInput == 1);
+
+        fish = new Fish(title, dateReceived, type, schedule);
+        fish.setDescription(description);
+
+        return fish;
+    } // end of addfish method
 
     private void addPet() throws Exception {
 

@@ -15,14 +15,35 @@ public class Fish extends Pet {
     private boolean isTropical;
     private boolean usesFreshwater;
 
-    public Fish(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
+
+    public boolean isTropical() {
+        return isTropical;
+    }
+
+    public void setTropical(boolean isTropical) {
+        this.isTropical = isTropical;
+    }
+
+    public boolean usesFreshwater() {
+        return usesFreshwater;
+    }
+
+    public void setUsesFreshwater(boolean usesFreshwater) {
+        this.usesFreshwater = usesFreshwater;
+    }
+
+    public Fish(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule, boolean canFly, boolean isMigratory) throws Exception {
         super(name, dateReceived, habitat, feedingSchedule);
+        this.isTropical = isTropical;
+        this.usesFreshwater = usesFreshwater;
         setName(name);
     }
 
     public Fish(int id, String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule) throws Exception {
         super(id, name, dateReceived, habitat, feedingSchedule);
         setName(name);
+        this.isTropical = false;
+        this.usesFreshwater = false;
     }
 
     public String getName() { return name; }
