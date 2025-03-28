@@ -31,14 +31,6 @@ This project separates concerns between the UI (console-based interface) and cor
 
 <br>
 
-## 📋 Project Overview
-*Professional-grade attendance tracking system for educational institutions featuring:*
-- Multi-course management
-- Student roster administration
-- Granular attendance recording
-- Comprehensive reporting
-- Enterprise-grade input validation
-
 ## 🚀 Key Features
 
 ### 🐶 Pet Management
