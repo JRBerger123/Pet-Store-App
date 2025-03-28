@@ -1,0 +1,196 @@
+"C:\Program Files\Amazon Corretto\jdk17.0.7_7\bin\java.exe" "-javaagent:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2024.2.4\lib\idea_rt.jar=63878:C:\Program Files (x86)\JetBrains\IntelliJ IDEA 2024.2.4\bin" -Dfile.encoding=UTF-8 -classpath "C:\Users\ripret01\OneDrive - Wayne State College\Desktop\programming_fndmtls_2\Pet-Store-App\out\production\Pet-Store-App" library.app.PetStoreApp
+==================================================
+Welcome to the Pet Store App
+==================================================
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 1
+--------------------------------------------------
+Add Inventory
+--------------------------------------------------
+Please enter the following inventory information:
+Name: Smiles
+Date Received (MM-DD-YYYY): 01-01-2001
+Description or press enter to continue: this is a shark named smiles
+Type: 1=Bird, 2=Fish: 2
+Is the fish tropical? (0=No 1=Yes)  1
+Does the fish use freshwater? (0=No 1=Yes)  0
+HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace: 2
+Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: 5
+Successfully Added: 1 | Smiles | 01-01-2001 | AQUARIUM | BIWEEKLY
+Press enter to continue...
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 1
+--------------------------------------------------
+Add Inventory
+--------------------------------------------------
+Please enter the following inventory information:
+Name: Wings
+Date Received (MM-DD-YYYY): 01-02-2001
+Description or press enter to continue: This is a bird named wings
+Type: 1=Bird, 2=Fish: 1
+Can the bird fly? (0=No 1=Yes)  1
+Is the bird migratory? (0=No 1=Yes)  0
+HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace  1
+Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: 2
+Successfully Added: 2 | Wings | 01-02-2001 | CAGE | TWICE_DAILY
+Press enter to continue...
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 3
+--------------------------------------------------
+
+Bird Inventory
+--------------------------------------------------
+ID  Name            Date Rec'd Habitat         Feeding Schedule     Can Fly? Is Migratory?
+--- --------------- ---------- --------------- -------------------- -------- -------------
+  2 Wings           01-02-2001 CAGE            TWICE_DAILY          true     false
+
+Fish Inventory
+--------------------------------------------------
+ID  Name            Date Rec'd Habitat         Feeding Schedule     Is Tropical? Uses Freshwater?
+--- --------------- ---------- --------------- -------------------- ------------ ----------------
+  1 Smiles          01-01-2001 AQUARIUM        BIWEEKLY             true         false
+
+Press enter to continue...
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 6
+--------------------------------------------------
+Edit inventory:
+--------------------------------------------------
+Please enter the inventory id that you would like to edit: 1
+Fish
+1 = Edit name: Smiles
+2 = Edit date received: 01-01-2001
+3 = Edit description: this is a shark named smiles
+4 = Edit habitat: AQUARIUM
+5 = Edit feeding schedule: BIWEEKLY
+6 = Edit is tropical: true
+7 = Edit uses fresh water: false
+Please input what you would like to change: 5
+Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: 4
+Do you want to continue editing? (0=No 1=Yes)  0
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 3
+--------------------------------------------------
+
+Bird Inventory
+--------------------------------------------------
+ID  Name            Date Rec'd Habitat         Feeding Schedule     Can Fly? Is Migratory?
+--- --------------- ---------- --------------- -------------------- -------- -------------
+  2 Wings           01-02-2001 CAGE            TWICE_DAILY          true     false
+
+Fish Inventory
+--------------------------------------------------
+ID  Name            Date Rec'd Habitat         Feeding Schedule     Is Tropical? Uses Freshwater?
+--- --------------- ---------- --------------- -------------------- ------------ ----------------
+  1 Smiles          01-01-2001 AQUARIUM        WEEKLY               true         false
+
+Press enter to continue...
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 2
+--------------------------------------------------
+Delete Inventory
+--------------------------------------------------
+Please enter the inventory id: 2
+Successfully Deleted: 2 | Wings | 01-02-2001 | CAGE | TWICE_DAILY
+Press enter to continue...
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 3
+--------------------------------------------------
+
+Bird Inventory
+--------------------------------------------------
+ID  Name            Date Rec'd Habitat         Feeding Schedule     Can Fly? Is Migratory?
+--- --------------- ---------- --------------- -------------------- -------- -------------
+
+Fish Inventory
+--------------------------------------------------
+ID  Name            Date Rec'd Habitat         Feeding Schedule     Is Tropical? Uses Freshwater?
+--- --------------- ---------- --------------- -------------------- ------------ ----------------
+  1 Smiles          01-01-2001 AQUARIUM        WEEKLY               true         false
+
+Press enter to continue...
+--------------------------------------------------
+Main Menu
+--------------------------------------------------
+0 = End Program
+1 = Add Item
+2 = Delete Item
+3 = Display Inventory
+4 = Save Inventory
+5 = Load Inventory
+6 = Edit Inventory
+--------------------------------------------------
+Menu Choice: 0
+--------------------------------------------------
+
+Process finished with exit code 0
