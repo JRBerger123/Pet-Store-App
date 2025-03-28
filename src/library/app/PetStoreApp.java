@@ -124,20 +124,6 @@ public class PetStoreApp {
             throw new Exception("Invalid option! ");
         }
 
-        try {
-            userInput = Input.getIntRange("HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace  ", 1, 4);
-            habitat = HabitatType.values()[userInput - 1];
-        } catch (Exception e){
-            throw new Exception("Invalid data! Pet habitat type = " + habitat);
-        }
-
-        try {
-            userInput = Input.getIntRange("Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: ", 1, 5);
-            feedingSchedule = FeedingSchedule.values()[userInput - 1];
-        } catch (Exception e){
-            throw new Exception("Invalid data! Feeding Schedule = " + feedingSchedule);
-        }
-
         bird = new Bird(name, dateReceived, habitat, feedingSchedule, canFly, isMigratory);
         bird.setDescription(description);
 
@@ -176,6 +162,30 @@ public class PetStoreApp {
             throw new Exception("Invalid option! ");
         }
 
+        fish = new Fish(name, dateReceived, habitat, feedingSchedule, isTropical, usesFreshwater);
+        fish.setDescription(description);
+
+        return fish;
+    } // end of addPeriodical method
+
+    /**
+     * Adds a new pet to the Pet Store inventory. <p>
+     * Prompts user for the pet type and calls the appropriate method to add the pet.
+     * @throws Exception if an error occurs while adding a pet
+     */
+    private void addPet() throws Exception {
+        int userInput = 0;
+        HabitatType habitat = null;
+        FeedingSchedule feedingSchedule = null;
+
+        System.out.println("Add Inventory");
+        System.out.println(SINGLE_DASH_LINE);
+
+        System.out.println("Please enter the following inventory information:");
+        String name = Input.getString("Name: ");
+        String dateReceived = Input.getDate("Date Received (MM-DD-YYYY): ");
+        String description = Input.getLine("Description or press enter to continue: ");
+
         try {
             userInput = Input.getIntRange("HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace: ", 1, 4);
             habitat = HabitatType.values()[userInput - 1];
@@ -189,26 +199,6 @@ public class PetStoreApp {
         } catch (Exception e){
             throw new Exception("Invalid data! Feeding Schedule = " + feedingSchedule);
         }
-
-        fish = new Fish(name, dateReceived, habitat, feedingSchedule, isTropical, usesFreshwater);
-        fish.setDescription(description);
-
-        return fish;
-    } // end of addPeriodical method
-
-    /**
-     * Adds a new pet to the Pet Store inventory. <p>
-     * Prompts user for the pet type and calls the appropriate method to add the pet.
-     * @throws Exception if an error occurs while adding a pet
-     */
-    private void addPet() throws Exception {
-        System.out.println("Add Inventory");
-        System.out.println(SINGLE_DASH_LINE);
-
-        System.out.println("Please enter the following inventory information:");
-        String name = Input.getString("Name: ");
-        String dateReceived = Input.getDate("Date Received (MM-DD-YYYY): ");
-        String description = Input.getLine("Description or press enter to continue: ");
 
         int inventoryType = Input.getIntRange("Type: 1=Bird, 2=Fish: ", 1, 2);
 
@@ -300,16 +290,27 @@ public class PetStoreApp {
 
     /**
      * Loads the Pet Store inventory from a file
-     * @param canFly whether the bird can fly
-     * @param isMigratory whether the bird is migratory
-     * @param isTropical whether the fish is tropical
-     * @param usesFreshwater whether the fish uses freshwater
      * @throws Exception if an error occurs while loading the inventory
      */
     public void loadInventory() {
+        /**
+         * Stores whether or not the bird can fly
+         */
         boolean canFly;
+
+        /**
+         * Stores whether or not the bird is migratory
+         */
         boolean isMigratory;
+
+        /**
+         * Stores whether or not the fish is tropical
+         */
         boolean isTropical;
+
+        /**
+         * Stores whether or not the fish uses freshwater
+         */
         boolean usesFreshwater;
 
         System.out.println("Loading data! Please wait...");
