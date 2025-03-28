@@ -26,8 +26,14 @@ This project separates concerns between the UI (console-based interface) and cor
 - [Top Contributors](#top-contributors)
 
 ## App Preview
-
+![UML Diagram of Pet App](assets/PetStoreUML.jpg)<br>
 ![Screenshot 1 of the application's output](assets/Preview_1.png)<br>
+![Screenshot 2 of the application's output](assets/Preview_2.png)<br>
+![Screenshot 3 of the application's output](assets/Preview_3.png)<br>
+![Screenshot 4 of the application's output](assets/Preview_4.png)<br>
+![Screenshot 4 of the application's output](assets/Preview_5.png)<br>
+![Screenshot 4 of the application's output](assets/Preview_6.png)<br>
+[View Output](output.txt)
 
 <br>
 
