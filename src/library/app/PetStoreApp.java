@@ -15,7 +15,7 @@ import library.inventory.HabitatType;
 
 /**
  * The {@code PetStoreApp} class provides a simple console-based application for managing a pet store inventory.
- *<p>
+ * <p>
  * Methods available:
  * </p>
  * <ul>
@@ -34,7 +34,7 @@ import library.inventory.HabitatType;
  * </ul>
  * 
  * @author Brandon Berger, Ricardo Pretorius
- * @version 0.9
+ * @version 1.0
  * @since 2025.03.24
  * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
@@ -223,7 +223,7 @@ public class PetStoreApp {
             case 2:
                 Fish p = addFish(name, dateReceived, description);
                 inventory.add(p);
-                System.out.println("Successfully Added: " + p);
+                System.out.println("\033[32m" + "Successfully Added: " + "\033[37m" + p);
                 Input.getLine("Press enter to continue...");
                 break;
             default:
@@ -234,15 +234,15 @@ public class PetStoreApp {
 
     private void displayInventory(){
         if (inventory.isEmpty()){
-            System.out.println("\033[33mInventory is empty!\033[37m");
+            System.out.println("\033[33m" + "Inventory is empty!" + "\033[37m");
             Input.getLine("Press enter to continue...");
             return;
         }
 
         System.out.println("\nBird Inventory");
         System.out.println(SINGLE_DASH_LINE);
-        System.out.println("ID  Name            Date Rec'd Habitat         Feeding Schedule  ");
-        System.out.println("--- --------------- ---------- --------------- ----------        ");
+        System.out.println("ID  Name            Date Rec'd Habitat         Feeding Schedule     Can Fly? Is Migratory?");
+        System.out.println("--- --------------- ---------- --------------- -------------------- -------- -------------");
         for (Pet item : inventory) {
             if (item instanceof Bird){
                 item.displayItem();
@@ -252,8 +252,8 @@ public class PetStoreApp {
 
         System.out.println("Fish Inventory");
         System.out.println(SINGLE_DASH_LINE);
-        System.out.println("ID  Name            Date Rec'd Habitat         Feeding Schedule  ");
-        System.out.println("--- --------------- ---------- --------------- ----------        ");
+        System.out.println("ID  Name            Date Rec'd Habitat         Feeding Schedule     Is Tropical? Uses Freshwater?");
+        System.out.println("--- --------------- ---------- --------------- -------------------- ------------ ----------------");
         for (Pet item : inventory) {
             if (item instanceof Fish){
                 item.displayItem();
@@ -265,18 +265,12 @@ public class PetStoreApp {
     } // end of displayInventory
 
     /**
-     * Saves the Pet Store inventory to a file
+     * Saves the Pet Store inventory to a file using the pipe character as a delimiter with each line representing a pet.
      * @throws Exception if an error occurs while saving the inventory
      */
     public void saveInventory(){
         System.out.println("Saving data! Please wait...");
 
-        /*
-        Try-With-Resources: shortcut way to declare and initialize in one step
-        when you use this way of opening the file as part of the try statement
-        Java will automatically close the file so there is no need to write a close statement
-        NOTE: Java doesn't automatically close the file if the file is opened inside the block
-        */
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PetStoreApp.INVENTORY_FILE))) {
 
             for (Pet item : inventory) {
@@ -307,6 +301,10 @@ public class PetStoreApp {
 
     /**
      * Loads the Pet Store inventory from a file
+     * @param canFly whether the bird can fly
+     * @param isMigratory whether the bird is migratory
+     * @param isTropical whether the fish is tropical
+     * @param usesFreshwater whether the fish uses freshwater
      * @throws Exception if an error occurs while loading the inventory
      * @throws IOException if an error occurs while reading the file
      */
@@ -397,7 +395,7 @@ public class PetStoreApp {
             return;
         }
     
-        System.out.println(inventory.size() + " Inventory records successfully loaded from " + PetStoreApp.INVENTORY_FILE);
+        System.out.println("\033[32m" + "Inventory records(" + "\033[37m" + inventory.size() + "\033[32m" + ") successfully loaded from: " + "\033[37m" + PetStoreApp.INVENTORY_FILE);
         Input.getLine("Press any key to continue...");
     }
 
@@ -424,7 +422,7 @@ public class PetStoreApp {
             System.out.println("Main Menu");
             System.out.println(SINGLE_DASH_LINE);
 
-            System.out.println("0 = End Program");
+            System.out.println("0 = \033[1;31mEnd Program\033[37m");
             System.out.println("1 = Add Item");
             System.out.println("2 = Delete Item");
             System.out.println("3 = Display Inventory");
@@ -471,7 +469,7 @@ public class PetStoreApp {
 
     /**
      * Main method for the Pet Store App
-     * @param args
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
 

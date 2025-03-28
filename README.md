@@ -1,10 +1,20 @@
-## Pet Store App
+## 🐾 Pet Store App
 
-This app is meant as practice for using classes in Java<br>
-This Java-based Attendance App is a console application that allows users to perform basic Attendence keeping operations. It emphasizes input validation, clean code structure, and error handling. Administrators can add a student, update the student's attendance, and modify courses that the students can attend. The app adheres to object-oriented principles, separating concerns between the UI (Attendance App) and Student logic (Student and Course class).<br>
-<br>
+This Java-based Pet Store App is a console application designed to help users manage pet information efficiently. This project serves as practice for using Java classes while emphasizing:
+- Object-oriented programming (OOP) principles
+- Input validation
+- Error handling
 
-## Table of Contents
+Administrators can:
+- Add new pets to the store
+- Update pet details
+- Organize pets by species, breed, and characteristics
+- Display pet information in a structured format
+
+This project separates concerns between the UI (console-based interface) and core logic (Pet, Bird, and other related classes).
+<br> 
+
+## 📌 Table of Contents
 
 - [App Preview](#app-preview)
 - [Features](#features)
@@ -35,43 +45,29 @@ This Java-based Attendance App is a console application that allows users to per
 
 ## 🚀 Key Features
 
-### 📚 Course Management
-- Create unlimited course sections
-- Unique course naming conventions
-- Dynamic student capacity per course
-- Conflict-free seat allocation system
+### 🐶 Pet Management
+- Add, update, and remove pets
+- Categorize pets by species, breed, and unique traits
+- Retrieve detailed pet information
 
-### 👥 Student Administration
-- Secure student enrollment with:
-  - Full name validation
-  - Unique seat numbering (0-55 range)
-  - Duplicate entry prevention
-- Real-time roster visualization
+### 🦜 Bird-Specific Features
+- Track flight ability (canFly) and migratory status (isMigratory)
+- Display bird-specific details using the displayItem() method
 
-### ✅ Attendance Recording
-- Four status categories:
-  1. 🟢 On-Time
-  2. 🟡 Late
-  3. 🔵 Excused Absence
-  4. 🔴 Unexcused Absence
-- Context-aware status selection
-- Non-destructive editing capability
+### 📝 Data Validation
+- Ensures proper data entry for all pet details
+- Prevents duplicate pet records
+- Enforces type safety for numeric inputs
 
-### 📊 Advanced Reporting
-- **Section-Specific Reports:**
-  - Attendance frequency analytics
-  - Punctuality trends
-  - Absence patterns
-- **Institutional Reports:**
-  - Cross-course comparisons
-  - Student engagement metrics
-  - Historical attendance tracking
+### 📊 Reporting & Display
+- View a structured list of all pets
+- Search pets by type, breed, or name
+- Interactive console interface for user-friendly navigation
 
-### 🔒 Security & Compliance
-- Input sanitization protocols
-- Type-safe data handling
-- Audit-ready transaction logging
-- GDPR-friendly data management
+### 🔒 Security & Reliability
+- Prevents invalid input from disrupting the system
+- Clean and maintainable Java class structure
+- Adheres to object-oriented programming (OOP) best practices
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -81,11 +77,11 @@ To install and run this project locally, follow these steps:
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/JRBerger123/Attendance-App.git
+    git clone https://github.com/JRBerger123/pet-store-app.git
     ```
 2. Navigate to the project directory:
     ```sh
-    cd Attendance-App
+    cd pet-store-app
     ```
 3. Compile the Java source files:
     ```sh
@@ -93,7 +89,7 @@ To install and run this project locally, follow these steps:
     ```
 4. Run the application:
     ```sh
-    java -cp bin StudentApp
+    java -cp bin PetStoreApp
     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -141,8 +137,8 @@ Helpful resources for README Template Examples:
 
 ## Top Contributors
 
-<a href="https://github.com/JRBerger123/Attendance-App/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=JRBerger123/Attendance-App" alt="contrib.rocks image" />
+<a href="https://github.com/JRBerger123/Pet-Store-App/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=JRBerger123/Pet-Store-App" alt="contrib.rocks image" />
 </a>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

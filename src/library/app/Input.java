@@ -141,7 +141,7 @@ public class Input {
             userInput = Input.sc.nextLine();
 
             try{
-                LocalDate.parse(userInput, DateTimeFormatter.ofPattern("MM-DD-YYYY"));
+                LocalDate.parse(userInput, DateTimeFormatter.ofPattern("MM-dd-yyyy"));
                 break;
             } catch (Exception e){
                 System.out.print("Invalid input! Please enter a valid date (MM-DD-YYYY): ");
@@ -150,6 +150,6 @@ public class Input {
 
         return userInput;
 
-    } // end of getInt
+    }
 
 } // end of library.app.Input class

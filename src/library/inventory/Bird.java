@@ -1,10 +1,23 @@
 package library.inventory;
 
 /**
- * ...
- *
+ * The {@code Bird} class represents a bird object. <p>
+ * The {@code Bird} class extends the {@code Pet} class and adds the following properties:
+ * <ul>
+ *      <li>canFly - whether the bird can fly</li>
+ *      <li>isMigratory - whether the bird is migratory</li>
+ * </ul>
+ * Methods available:
+ * <ul>
+ *      <li>{@link #canFly()} - Retrieves whether the bird can fly.</li>
+ *      <li>{@link #setCanFly(boolean)} - Sets whether the bird can fly.</li>
+ *      <li>{@link #isMigratory()} - Retrieves whether the bird is migratory.</li>
+ *      <li>{@link #setMigratory(boolean)} - Sets whether the bird is migratory.</li>
+ *      <li>{@link #displayItem()} - Displays the bird's information.</li>
+ * </ul>
+ * 
  * @author Brandon Berger, Ricardo Pretorius
- * @version 0.1
+ * @version 1.0
  * @since 2025.03.24
  * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
@@ -23,13 +36,13 @@ public class Bird extends Pet {
 
     /**
      * Creates a new bird object with the specified parameters.
-     * @param name
-     * @param dateReceived
-     * @param habitat
-     * @param feedingSchedule
-     * @param canFly
-     * @param isMigratory
-     * @throws Exception
+     * @param name the name of the bird
+     * @param dateReceived the date the bird was received
+     * @param habitat the habitat type of the bird
+     * @param feedingSchedule the feeding schedule of the bird
+     * @param canFly whether the bird can fly
+     * @param isMigratory whether the bird is migratory
+     * @throws Exception if any error occurs
      */
     public Bird(String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule, boolean canFly, boolean isMigratory) throws Exception {
         super(name, dateReceived, habitat, feedingSchedule);
@@ -40,20 +53,19 @@ public class Bird extends Pet {
 
     /**
      * Creates a new bird object with the specified parameters.
-     * @param id
-     * @param name
-     * @param dateReceived
-     * @param habitat
-     * @param feedingSchedule
-     * @param canFly
-     * @param isMigratory
-     * @throws Exception
+     * @param id the id of the bird
+     * @param name the name of the bird
+     * @param dateReceived the date the bird was received
+     * @param habitat the habitat type of the bird
+     * @param feedingSchedule the feeding schedule of the bird
+     * @param canFly whether the bird can fly
+     * @param isMigratory whether the bird is migratory
+     * @throws Exception if any error occurs
      */
     public Bird(int id, String name, String dateReceived, HabitatType habitat, FeedingSchedule feedingSchedule, boolean canFly, boolean isMigratory) throws Exception {
         super(id, name, dateReceived, habitat, feedingSchedule);
-        setName(name);
-        this.canFly = false;
-        this.isMigratory = false;
+        this.canFly = canFly;
+        this.isMigratory = isMigratory;
     }
 
     /**
@@ -94,6 +106,6 @@ public class Bird extends Pet {
     @Override
     public void displayItem(){
         super.displayItem();
-        System.out.printf(" %-15s %-10s\n", name, dateAdded, habitat, feedingSchedule);
+        System.out.printf(" %-8s %-13s\n", canFly(), isMigratory());
     }
 }
