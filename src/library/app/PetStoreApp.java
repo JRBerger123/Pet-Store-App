@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import library.inventory.Pet;
@@ -13,10 +14,27 @@ import library.inventory.Fish;
 import library.inventory.HabitatType;
 
 /**
- * ...
- *
+ * The {@code PetStoreApp} class provides a simple console-based application for managing a pet store inventory.
+ *<p>
+ * Methods available:
+ * </p>
+ * <ul>
+ *     <li>{@link #PetStoreApp()} - Constructor</li>
+ *     <li>{@link #displayAppHeading()} - Display the application heading</li>
+ *     <li>{@link #deleteItem()} - Delete an item from the inventory</li>
+ *     <li>{@link #addBird(String, String, String)} - Add a new bird to the inventory</li>
+ *     <li>{@link #addFish(String, String, String)} - Add a new fish to the inventory</li>
+ *     <li>{@link #addPet()} - Add a new pet to the inventory</li>
+ *     <li>{@link #displayInventory()} - Display the inventory</li>
+ *     <li>{@link #saveInventory()} - Save the inventory to a file</li>
+ *     <li>{@link #loadInventory()} - Load the inventory from a file</li>
+ *     <li>{@link #errorOccurred(String)} - Display an error message in red text</li>
+ *     <li>{@link #mainMenu()} - Main menu for the Pet Store App</li>
+ *     <li>{@link #main(String[])} - Main method for the Pet Store App</li>
+ * </ul>
+ * 
  * @author Brandon Berger, Ricardo Pretorius
- * @version 0.1
+ * @version 0.9
  * @since 2025.03.24
  * @see <a href="https://github.com/JRBerger123/Pet-Store-App">GitHub Repository</a>
  * @see <a href="https://github.com/JRBerger123">Brandon Berger's GitHub</a>
@@ -33,10 +51,17 @@ public class PetStoreApp {
 
     private final List<Pet> inventory;
 
+    /**
+     * Constructor for the PetStoreApp class. <p>
+     * Initializes the inventory ArrayList.
+     */
     public PetStoreApp(){
         this.inventory = new ArrayList<>();
     } // end of constructor
 
+    /**
+     * Displays the application heading.
+     */
     private void displayAppHeading() {
 
         System.out.println(DOUBLE_DASH_LINE);
@@ -45,6 +70,9 @@ public class PetStoreApp {
 
     } // end of displayAppHeading method
 
+    /**
+     * Deletes an item from the Pet Store inventory.
+     */
     private void deleteItem(){
         System.out.println("Delete Inventory");
         System.out.println(SINGLE_DASH_LINE);
@@ -55,25 +83,47 @@ public class PetStoreApp {
             System.out.println(id);
             if (item.getId() == id){
                 inventory.remove(item);
-                System.out.println("Successful Delete: " + item);
+                System.out.println("Successfully Deleted: " + item);
                 Input.getLine("Press enter to continue...");
                 return;
             }
         }
 
-        System.out.println("ERROR: Inventory ID:" + id + " NOT found!");
+        System.out.println("Inventory ID: " + id + " NOT found!");
 
     } // end of deleteItem method
 
-    private Bird addBird(String title, String dateReceived, String description) throws Exception {
-
+    /**
+     * Adds a new bird to the Pet Store inventory. <p>
+     * Prompts user for unique class variables and creates a new bird object.
+     * @param name is the name of the pet
+     * @param dateReceived is the date the pet was received
+     * @param description is an optional description of the pet (can be empty)
+     * @return the new bird object
+     * @throws Exception if an error occurs while adding the bird
+     */
+    private Bird addBird(String name, String dateReceived, String description) throws Exception {
         Bird bird;
         int userInput;
-        String name;
+
         HabitatType habitat = null;
+        FeedingSchedule feedingSchedule = null;
+        boolean canFly;
+        boolean isMigratory;
 
+        try {
+            userInput = Input.getIntRange("Can the bird fly? (0=No 1=Yes)  ", 0, 1);
+            canFly = (userInput == 1) ? true : false;
+        } catch (Exception e){
+            throw new Exception("Invalid option! ");
+        }
 
-        name = Input.getString("Name of bird:  ");
+        try {
+            userInput = Input.getIntRange("Is the bird migratory? (0=No 1=Yes)  ", 0, 1);
+            isMigratory = (userInput == 1) ? true : false;
+        } catch (Exception e){
+            throw new Exception("Invalid option! ");
+        }
 
         try {
             userInput = Input.getIntRange("HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace  ", 1, 4);
@@ -82,47 +132,77 @@ public class PetStoreApp {
             throw new Exception("Invalid data! Pet habitat type = " + habitat);
         }
 
-    int canFlyInput = Input.getIntRange("Can this bird fly? 1=Yes, 0=No: ", 0, 1);
-    boolean canFly = (canFlyInput == 1);
+        try {
+            userInput = Input.getIntRange("Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: ", 1, 5);
+            feedingSchedule = FeedingSchedule.values()[userInput - 1];
+        } catch (Exception e){
+            throw new Exception("Invalid data! Feeding Schedule = " + feedingSchedule);
+        }
 
-    int isMigratory = Input.getIntRange("Is this bird migratory? 1=Yes, 0=No: ", 0, 1);
-    boolean migratory = (isMigratory == 1);
-
-        bird = new Bird(title, dateReceived, name, habitat, canFly, migratory);
+        bird = new Bird(name, dateReceived, habitat, feedingSchedule, canFly, isMigratory);
         bird.setDescription(description);
 
         return bird;
     } // end of addPet method
 
-    private Fish addFish(String title, String dateReceived, String description) throws Exception {
-
+    /**
+     * Add a new fish to the Pet Store inventory. <p>
+     * Prompts user for unique class variables and creates a new fish object.
+     * @param name is the name of the pet
+     * @param dateReceived is the date the pet was received
+     * @param description is an optional description of the pet (can be empty)
+     * @return the new fish object
+     * @throws Exception if an error occurs while adding the fish
+     */
+    private Fish addFish(String name, String dateReceived, String description) throws Exception {
         Fish fish;
-        String type;
-        FeedingSchedule schedule = null;
+        int userInput;
 
-        type = Input.getString("Fish type: ");
+        HabitatType habitat = null;
+        FeedingSchedule feedingSchedule = null;
+        boolean isTropical;
+        boolean usesFreshwater;
 
         try {
-            int userInput = Input.getIntRange("Category 1=Magazine, 2=Journal, 3=Newspaper: ", 1, 3);
-            schedule = FeedingSchedule.values()[userInput - 1];
+            userInput = Input.getIntRange("Is the fish tropical? (0=No 1=Yes)  ", 0, 1);
+            isTropical = (userInput == 1) ? true : false;
         } catch (Exception e){
-            throw new Exception("Invalid data! Periodical Category = " + schedule);
+            throw new Exception("Invalid option! ");
         }
 
-        int isTropicalInput = Input.getIntRange("Is this fish tropical? 1=Yes, 0=No:  ", 0, 1);
-        boolean isTropical = (isTropicalInput == 1);
+        try {
+            userInput = Input.getIntRange("Does the fish use freshwater? (0=No 1=Yes)  ", 0, 1);
+            usesFreshwater = (userInput == 1) ? true : false;
+        } catch (Exception e){
+            throw new Exception("Invalid option! ");
+        }
 
-        int usesFreshwaterInput = Input.getIntRange("Does this fish use fresh water? 1=Yes, 0=No: ", 0, 1);
-        boolean usesFreshwater = (usesFreshwaterInput == 1);
+        try {
+            userInput = Input.getIntRange("HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace  ", 1, 4);
+            habitat = HabitatType.values()[userInput - 1];
+        } catch (Exception e){
+            throw new Exception("Invalid data! Pet habitat type = " + habitat);
+        }
 
-        fish = new Fish(title, dateReceived, type, schedule);
+        try {
+            userInput = Input.getIntRange("Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: ", 1, 5);
+            feedingSchedule = FeedingSchedule.values()[userInput - 1];
+        } catch (Exception e){
+            throw new Exception("Invalid data! Feeding Schedule = " + feedingSchedule);
+        }
+
+        fish = new Fish(name, dateReceived, habitat, feedingSchedule, isTropical, usesFreshwater);
         fish.setDescription(description);
 
         return fish;
-    } // end of addfish method
+    } // end of addPeriodical method
 
+    /**
+     * Adds a new pet to the Pet Store inventory. <p>
+     * Prompts user for the pet type and calls the appropriate method to add the pet.
+     * @throws Exception if an error occurs while adding a pet
+     */
     private void addPet() throws Exception {
-
         System.out.println("Add Inventory");
         System.out.println(SINGLE_DASH_LINE);
 
@@ -146,8 +226,6 @@ public class PetStoreApp {
                 System.out.println("Successfully Added: " + p);
                 Input.getLine("Press enter to continue...");
                 break;
-            case 3:
-                break;
             default:
                 throw new Exception("Invalid Input! Inventory Type = " + inventoryType);
         } // end of switch
@@ -155,10 +233,16 @@ public class PetStoreApp {
     } // end of addItem method
 
     private void displayInventory(){
-        System.out.println("Pet Inventory");
+        if (inventory.isEmpty()){
+            System.out.println("\033[33mInventory is empty!\033[37m");
+            Input.getLine("Press enter to continue...");
+            return;
+        }
+
+        System.out.println("\nBird Inventory");
         System.out.println(SINGLE_DASH_LINE);
-        System.out.println("ID  Title           Date Rec'd Author          Genre");
-        System.out.println("--- --------------- ---------- --------------- ----------");
+        System.out.println("ID  Name            Date Rec'd Habitat         Feeding Schedule  ");
+        System.out.println("--- --------------- ---------- --------------- ----------        ");
         for (Pet item : inventory) {
             if (item instanceof Bird){
                 item.displayItem();
@@ -166,10 +250,10 @@ public class PetStoreApp {
         }
         System.out.println();
 
-        System.out.println("Periodical Inventory");
+        System.out.println("Fish Inventory");
         System.out.println(SINGLE_DASH_LINE);
-        System.out.println("ID  Title           Date Rec'd Publisher       Category");
-        System.out.println("--- --------------- ---------- --------------- ----------");
+        System.out.println("ID  Name            Date Rec'd Habitat         Feeding Schedule  ");
+        System.out.println("--- --------------- ---------- --------------- ----------        ");
         for (Pet item : inventory) {
             if (item instanceof Fish){
                 item.displayItem();
@@ -180,6 +264,10 @@ public class PetStoreApp {
         Input.getLine("Press enter to continue...");
     } // end of displayInventory
 
+    /**
+     * Saves the Pet Store inventory to a file
+     * @throws Exception if an error occurs while saving the inventory
+     */
     public void saveInventory(){
         System.out.println("Saving data! Please wait...");
 
@@ -191,27 +279,25 @@ public class PetStoreApp {
         */
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(PetStoreApp.INVENTORY_FILE))) {
 
-            for(Pet item : inventory){
-
-                // The file will be piped delimited so each field is separated by a |
-                if (item instanceof Bird)
-                    bw.write("BOOK|");
-                else if (item instanceof Fish)
-                    bw.write("PERIODICAL|");
-
-                bw.write(item.getId() + "|" + item.getName() + "|" + item.getDateAdded() + "|" + item.getDescription() + "|");
-
-                if (item instanceof Bird)
-                    bw.write(((Bird) item).getName() + "|" + ((Bird) item).getHabitatType() + "\n");
-                else if (item instanceof Fish)
-                    bw.write(((Fish) item).getType() + "|" + ((Fish) item).getFeedingSchedule() + "\n");
+            for (Pet item : inventory) {
+                bw.write(item.getClass().getSimpleName() + "|"); // Dynamically write the class type (Bird or Fish)
+    
+                bw.write(item.getId() + "|" + item.getName() + "|" + item.getDateAdded() + "|" + item.getDescription() + "|" + item.getHabitatType() + "|" + item.getFeedingSchedule() + "|");
+    
+                if (item instanceof Bird) {
+                    Bird bird = (Bird) item;
+                    bw.write(bird.canFly() + "|" + bird.isMigratory() + "\n");
+                } else if (item instanceof Fish) {
+                    Fish fish = (Fish) item;
+                    bw.write(fish.isTropical() + "|" + fish.usesFreshwater() + "\n");
+                }
             }
 
             bw.flush();
             // No explicit close needed - automatically handled when using Try-With-Resources
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            errorOccurred("Error saving inventory: " + e.getMessage());
         }
 
         System.out.println(inventory.size() + " Inventory records successfully written to " + PetStoreApp.INVENTORY_FILE);
@@ -219,55 +305,115 @@ public class PetStoreApp {
 
     }
 
-    public void loadInventory(){
+    /**
+     * Loads the Pet Store inventory from a file
+     * @throws Exception if an error occurs while loading the inventory
+     * @throws IOException if an error occurs while reading the file
+     */
+    public void loadInventory() {
+        boolean canFly;
+        boolean isMigratory;
+        boolean isTropical;
+        boolean usesFreshwater;
+
         System.out.println("Loading data! Please wait...");
-
-        inventory.clear(); //empty the ArrayList so we can load the data from the file
-
-        /*
-        Try-With-Resources: shortcut way to declare and initialize in one step
-        when you use this way of opening the file as part of the try statement
-        Java will automatically close the file so there is no need to write a close statement
-        NOTE: Java doesn't automatically close the file if the file is opened inside the block
-        */
+    
+        inventory.clear(); // Empty the ArrayList before loading data
+    
         try (BufferedReader br = new BufferedReader(new FileReader(PetStoreApp.INVENTORY_FILE))) {
-
             String inLine;
+            int lineCount = -1;
+    
+            while ((inLine = br.readLine()) != null) {
+                lineCount++;
 
-            while ((inLine = br.readLine()) != null) {  // exclude newline
-
-                String[] data = inLine.split("[|]"); // [|] is a regex for splitting by the pipe character
-
-                //0=item 1=id, 2=title, 3=date, 4=description, 5=author/publisher, 6=genre/category
-                switch(data[0]){
-                    case "BOOK":
-                        Bird b = new Bird(Integer.parseInt(data[1]), data[2], data[3], data[5], HabitatType.valueOf(data[6]));
-                        b.setDescription(data[4]);
-                        inventory.add(b);
-                        break;
-                    case "PERIODICAL":
-                        Fish p = new Fish(Integer.parseInt(data[1]), data[2], data[3], data[5], FeedingSchedule.valueOf(data[6]));
-                        p.setDescription(data[4]);
-                        inventory.add(p);
-                        break;
+                String[] data = inLine.split("[|]"); // Split by pipe character
+    
+                if (data.length < 6) { 
+                    errorOccurred("Skipping malformed line(" + lineCount + "):" + inLine);
+                    continue; 
+                }
+    
+                String type = data[0];  
+                int id = Integer.parseInt(data[1]);
+                String name = data[2];
+                String dateReceived = data[3];
+                String description = data[4];
+                HabitatType habitat = HabitatType.valueOf(data[5]);
+                FeedingSchedule feedingSchedule = FeedingSchedule.valueOf(data[6]);
+    
+                switch (type) {
+                    case "Bird": 
+    
+                        try {
+                            canFly = Boolean.parseBoolean(data[7]);
+                            isMigratory = Boolean.parseBoolean(data[8]);
+                        } catch (Exception e) {
+                            errorOccurred("Invalid unique data for Bird: " + inLine);
+                            continue;
+                        }
+                        
+                        try {
+                            Bird bird = new Bird(id, name, dateReceived, habitat, feedingSchedule, canFly, isMigratory);
+                            bird.setDescription(description);
+                            inventory.add(bird);
+                            break;
+                        } catch (Exception e) {
+                            errorOccurred("Error when creating Bird object: " + e.getMessage());
+                            continue;
+                        }
+    
+                    case "Fish":
+    
+                        try {
+                            isTropical = Boolean.parseBoolean(data[7]);
+                            usesFreshwater = Boolean.parseBoolean(data[8]);
+                        } catch (Exception e) {
+                            errorOccurred("Invalid unique data for Fish: " + inLine);
+                            continue;
+                        }
+    
+                        try {
+                            Fish fish = new Fish(id, name, dateReceived, habitat, feedingSchedule, isTropical, usesFreshwater);
+                            fish.setDescription(description);
+                            inventory.add(fish);
+                            break;
+                        } catch (Exception e) {
+                            errorOccurred("Error when creating Fish object: " + e.getMessage());
+                            continue;
+                        }
+    
                     default:
-                        throw new Exception("Invalid inventory type: " + data[0]);
-                } // end of switch
-
-            } // end of while loop
-
-            // No explicit close needed - automatically handled when using Try-With-Resources
-
-            Pet.setLastId(inventory.get(inventory.size() - 1).getId());
-
+                        errorOccurred("Unknown inventory type: " + type);
+                }
+            }
+    
+            if (!inventory.isEmpty()) {
+                Pet.setLastId(inventory.get(inventory.size() - 1).getId());
+            }
+    
         } catch (Exception e) {
-            e.getMessage();
-        } // end of try-catch
-
+            errorOccurred("Error reading inventory file: " + e.getMessage());
+            return;
+        }
+    
         System.out.println(inventory.size() + " Inventory records successfully loaded from " + PetStoreApp.INVENTORY_FILE);
-        Input.getLine("Please any key to continue...");
-    } // end of loadInventory method
+        Input.getLine("Press any key to continue...");
+    }
 
+    /**
+    * Display an error message in red text
+    * @param message the error message to display
+    */
+    private void errorOccurred(String message){
+        System.err.println("\033[31" + message + "\033[0m");
+        Input.getLine("Press enter to continue...");
+    }
+
+    /**
+     * Main menu for the Pet Store App
+     * @throws Exception if any error occurs
+     */
     private void mainMenu() throws Exception {
 
         boolean keepRunning = true;
@@ -295,18 +441,16 @@ public class PetStoreApp {
                     break;
                 case 1:
                     try {
-                        this.addItem();
+                        this.addPet();
                     } catch (Exception e){
-                        System.out.println(e.getMessage());
-                        Input.getLine("Press enter to continue...");
+                        errorOccurred(e.getMessage());
                     }
                     break;
                 case 2:
                     try {
                         this.deleteItem();
                     } catch (Exception e){
-                        System.out.println(e.getMessage());
-                        Input.getLine("Press enter to continue...");
+                        errorOccurred(e.getMessage());
                     }
                     break;
                 case 3:
@@ -325,6 +469,10 @@ public class PetStoreApp {
         } // end of while loop
     } // end of mainMenu
 
+    /**
+     * Main method for the Pet Store App
+     * @param args
+     */
     public static void main(String[] args) {
 
         PetStoreApp app = new PetStoreApp();
