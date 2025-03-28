@@ -43,7 +43,7 @@ import library.inventory.HabitatType;
  */
 public class PetStoreApp {
 
-    private static final String INVENTORY_FILE = "LibraryData.txt";
+    private static final String INVENTORY_FILE = "PetStoreData.txt";
     
     private static final String DOUBLE_DASH_LINE = String.format("%50s", "").replace(' ', '=');
 
@@ -397,6 +397,130 @@ public class PetStoreApp {
     
         System.out.println("\033[32m" + "Inventory records(" + "\033[37m" + inventory.size() + "\033[32m" + ") successfully loaded from: " + "\033[37m" + PetStoreApp.INVENTORY_FILE);
         Input.getLine("Press any key to continue...");
+    }
+
+    private void editInventory() {
+
+        String petType = "";
+        int userInput = 0;
+        System.out.println("Edit inventory: ");
+        System.out.println(SINGLE_DASH_LINE);
+
+        int id = Input.getInt("Please enter the inventory id that you would like to edit: ");
+
+        for (Pet item : inventory){
+            System.out.println(id);
+            if (item.getId() == id){
+
+                petType = item.getClass().getSimpleName();
+                System.out.println("1 = Edit name: " + item.getName());
+                System.out.println("2 = Edit date received: " + item.getDateAdded());
+                System.out.println("3 = Edit description: " + item.getDescription());
+                System.out.println("4 = Edit habitat: " + item.getHabitatType());
+                System.out.println("5 = Edit feeding schedule: " + item.getFeedingSchedule());
+
+                if (petType == "Bird") {
+                    System.out.println("6 = Edit can fly: " + item.canFly);
+                    System.out.println("7 = Edit is migratory: " + item.isMigratory);
+                }
+                else if (petType == "Fish") {
+                    System.out.println("6 = Edit is tropical: " + item.isTropical);
+                    System.out.println("7 = Edit uses fresh water: " +item.usesFreshwater);
+                }
+                else {
+                    errorOccurred("Invalid pet type!");
+                }
+                userInput = Input.getIntRange("Please input what you would like to change: ", 1, 7);
+
+                switch (userInput) {
+                    case 1:
+                        try {
+                            String name = Input.getString("What would you like the new name to be? ");
+                            item.setName(name);
+                        } catch (Exception e){
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+                    case 2:
+                        try {
+                            String dateReceived = Input.getDate("Date Received (MM-DD-YYYY): ");
+                            item.setDateAdded(dateReceived);
+                        } catch (Exception e){
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+                    case 3:
+                        try {
+                            String description = Input.getLine("Description or press enter to continue: ");
+                            item.setDescription(description);
+                        } catch (Exception e){
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+                    case 4:
+                        try {
+                            userInput = Input.getIntRange("HabitatType: 1=Cage, 2=Aquarium, 3=Terrarium, 4=OpenSpace  ", 1, 4);
+                            HabitatType habitat = HabitatType.values()[userInput - 1];
+                            item.setHabitatType(habitat);
+                        } catch (Exception e){
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+                    case 5:
+                        try {
+                            userInput = Input.getIntRange("Feeding Schedule: 1=Once Daily, 2=Twice Daily, 3=Three Times Daily, 4=Weekly, 5=Biweekly: ", 1, 5);
+                            FeedingSchedule schedule = FeedingSchedule.values()[userInput - 1];
+                            item.setFeedingSchedule(schedule);
+                        } catch (Exception e) {
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+                    case 6:
+                        try {
+                            if (petType == "Bird") {
+                                userInput = Input.getIntRange("Can the bird fly? (0=No 1=Yes)  ", 0, 1);
+                                boolean canFly = (userInput == 1) ? true : false;
+                                item.setCanFly(canFly);
+                            }
+                            else if (petType == "Fish") {
+                                userInput = Input.getIntRange("Is the fish tropical? (0=No 1=Yes)  ", 0, 1);
+                                boolean isTropical = (userInput == 1) ? true : false;
+                                item.setIsTropical(isTropical);
+                            }
+                            else {
+                                errorOccurred("Invalid pet type!");
+                            }
+                        } catch (Exception e) {
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+                    case 7:
+                        try {
+                            if (petType == "Bird") {
+                                userInput = Input.getIntRange("Is the bird migratory? (0=No 1=Yes)  ", 0, 1);
+                                boolean isMigratory = (userInput == 1) ? true : false;
+                                item.setIsMigratory(isMigratory);
+                            }
+                            else if (petType == "Fish") {
+                                userInput = Input.getIntRange("Does the fish use fresh water (0=No 1=Yes)  ", 0, 1);
+                                boolean usesFreshwater = (userInput == 1) ? true : false;
+                                item.setUsesFreshwater(usesFreshwater);
+                            }
+                            else {
+                                errorOccurred("Invalid pet type!");
+                            }
+                        } catch (Exception e) {
+                            errorOccurred(e.getMessage());
+                        }
+                        break;
+
+                    default:
+                        errorOccurred("Invalid menu choice: " + userInput);
+
+                return;
+            }
+        }
+
     }
 
     /**
