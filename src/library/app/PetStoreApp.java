@@ -306,7 +306,6 @@ public class PetStoreApp {
      * @param isTropical whether the fish is tropical
      * @param usesFreshwater whether the fish uses freshwater
      * @throws Exception if an error occurs while loading the inventory
-     * @throws IOException if an error occurs while reading the file
      */
     public void loadInventory() {
         boolean canFly;
@@ -399,18 +398,23 @@ public class PetStoreApp {
         Input.getLine("Press any key to continue...");
     }
 
+    /**
+     * Edit an item in the Pet Store inventory. <p>
+     * Prompts user for the inventory id and the field to edit.
+     * @throws Exception if an error occurs while editing the inventory
+     */
     private void editInventory() {
-
         String petType = "";
         int userInput = 0;
+
         System.out.println("Edit inventory: ");
         System.out.println(SINGLE_DASH_LINE);
 
         int id = Input.getInt("Please enter the inventory id that you would like to edit: ");
 
-        for (Pet item : inventory){
+        for (Pet item : inventory) {
             System.out.println(id);
-            if (item.getId() == id){
+            if (item.getId() == id) {
 
                 petType = item.getClass().getSimpleName();
                 System.out.println("1 = Edit name: " + item.getName());
@@ -420,12 +424,14 @@ public class PetStoreApp {
                 System.out.println("5 = Edit feeding schedule: " + item.getFeedingSchedule());
 
                 if (petType == "Bird") {
-                    System.out.println("6 = Edit can fly: " + item.canFly);
-                    System.out.println("7 = Edit is migratory: " + item.isMigratory);
+                    Bird bird = (Bird) item;
+                    System.out.println("6 = Edit can fly: " + bird.canFly());
+                    System.out.println("7 = Edit is migratory: " + bird.isMigratory());
                 }
                 else if (petType == "Fish") {
-                    System.out.println("6 = Edit is tropical: " + item.isTropical);
-                    System.out.println("7 = Edit uses fresh water: " +item.usesFreshwater);
+                    Fish fish = (Fish) item;
+                    System.out.println("6 = Edit is tropical: " + fish.isTropical());
+                    System.out.println("7 = Edit uses fresh water: " + fish.usesFreshwater());
                 }
                 else {
                     errorOccurred("Invalid pet type!");
@@ -478,14 +484,16 @@ public class PetStoreApp {
                     case 6:
                         try {
                             if (petType == "Bird") {
+                                Bird bird = (Bird) item;
                                 userInput = Input.getIntRange("Can the bird fly? (0=No 1=Yes)  ", 0, 1);
                                 boolean canFly = (userInput == 1) ? true : false;
-                                item.setCanFly(canFly);
+                                bird.setCanFly(canFly);
                             }
                             else if (petType == "Fish") {
+                                Fish fish = (Fish) item;
                                 userInput = Input.getIntRange("Is the fish tropical? (0=No 1=Yes)  ", 0, 1);
                                 boolean isTropical = (userInput == 1) ? true : false;
-                                item.setIsTropical(isTropical);
+                                fish.setTropical(isTropical);
                             }
                             else {
                                 errorOccurred("Invalid pet type!");
@@ -497,14 +505,16 @@ public class PetStoreApp {
                     case 7:
                         try {
                             if (petType == "Bird") {
+                                Bird bird = (Bird) item;
                                 userInput = Input.getIntRange("Is the bird migratory? (0=No 1=Yes)  ", 0, 1);
                                 boolean isMigratory = (userInput == 1) ? true : false;
-                                item.setIsMigratory(isMigratory);
+                                bird.setMigratory(isMigratory);
                             }
                             else if (petType == "Fish") {
+                                Fish fish = (Fish) item;
                                 userInput = Input.getIntRange("Does the fish use fresh water (0=No 1=Yes)  ", 0, 1);
                                 boolean usesFreshwater = (userInput == 1) ? true : false;
-                                item.setUsesFreshwater(usesFreshwater);
+                                fish.setUsesFreshwater(usesFreshwater);
                             }
                             else {
                                 errorOccurred("Invalid pet type!");
@@ -520,6 +530,7 @@ public class PetStoreApp {
                 return;
             }
         }
+    }
 
     }
 
